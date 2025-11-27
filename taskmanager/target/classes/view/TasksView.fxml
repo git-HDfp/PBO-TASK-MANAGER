@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" styleClass="root-background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taskmanager.controller.TasksViewController">
+
+   <left>
+        <VBox prefWidth="260.0" styleClass="sidebar" spacing="8">
+            <padding><Insets top="30" bottom="30" left="0" right="0"/></padding>
+
+            <Label styleClass="title-large" text="YuAi Team">
+                <VBox.margin><Insets bottom="35.0" left="25.0" /></VBox.margin>
+            </Label>
+
+            <!-- MAIN MENU Section -->
+            <Label styleClass="sidebar-section-heading" text="MAIN MENU">
+                <VBox.margin><Insets bottom="8.0" left="25.0" top="5.0" /></VBox.margin>
+            </Label>
+
+            <Button maxWidth="Infinity" onAction="#handleGoToDashboard" styleClass="nav-btn" text="📊  Dashboard" />
+            <Button maxWidth="Infinity" styleClass="nav-btn, nav-btn-active, nav-btn-active-tasks" text="📝  My Tasks" />
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- ACCOUNT Section -->
+            <Label styleClass="sidebar-section-heading" text="ACCOUNT">
+                <VBox.margin><Insets bottom="8.0" left="25.0" /></VBox.margin>
+            </Label>
+
+            <Button maxWidth="Infinity" onAction="#handleGoToProfile" styleClass="nav-btn" text="👤  Profile" />
+            <Button maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="🚪  Logout" />
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <HBox alignment="CENTER_LEFT">
+                <VBox>
+                    <Label styleClass="title-large" text="Kanban Board" />
+                    <Label styleClass="subtitle" text="Drag &amp; drop tasks between columns" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#handleAddTask" styleClass="btn-glass-primary" text="+ Create New Task" />
+            </HBox>
+
+            <HBox spacing="20" VBox.vgrow="ALWAYS">
+
+                <VBox HBox.hgrow="ALWAYS" styleClass="kanban-column, column-draft">
+                    <VBox alignment="CENTER_LEFT" styleClass="column-header-draft" prefHeight="50">
+                        <padding><Insets left="20"/></padding>
+                        <Label styleClass="column-title" text="DRAFT" />
+                    </VBox>
+                    <ScrollPane fitToWidth="true" styleClass="column-scroll" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="draftColumn" spacing="15" styleClass="task-container">
+                            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" styleClass="kanban-column, column-progress">
+                    <VBox alignment="CENTER_LEFT" styleClass="column-header-progress" prefHeight="50">
+                        <padding><Insets left="20"/></padding>
+                        <Label styleClass="column-title" text="IN PROGRESS" />
+                    </VBox>
+                    <ScrollPane fitToWidth="true" styleClass="column-scroll" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="inProgressColumn" spacing="15" styleClass="task-container">
+                            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" styleClass="kanban-column, column-editing">
+                    <VBox alignment="CENTER_LEFT" styleClass="column-header-editing" prefHeight="50">
+                        <padding><Insets left="20"/></padding>
+                        <Label styleClass="column-title" text="EDITING" />
+                    </VBox>
+                    <ScrollPane fitToWidth="true" styleClass="column-scroll" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="editingColumn" spacing="15" styleClass="task-container">
+                            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+
+                <VBox HBox.hgrow="ALWAYS" styleClass="kanban-column, column-done">
+                    <VBox alignment="CENTER_LEFT" styleClass="column-header-done" prefHeight="50">
+                        <padding><Insets left="20"/></padding>
+                        <Label styleClass="column-title" text="DONE" />
+                    </VBox>
+                    <ScrollPane fitToWidth="true" styleClass="column-scroll" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="doneColumn" spacing="15" styleClass="task-container">
+                            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
