@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" styleClass="root-background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taskmanager.controller.DashboardController">
+
+    <left>
+        <VBox fx:id="sidebar" prefWidth="260.0" styleClass="sidebar" spacing="8">
+            <padding><Insets top="20" bottom="20" left="0" right="0"/></padding>
+
+            <!-- Header with Toggle -->
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <VBox.margin><Insets bottom="20.0" left="20.0" right="10.0"/></VBox.margin>
+                <Button fx:id="toggleBtn" onAction="#handleSidebarToggle" styleClass="btn-icon" text="☰" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
+                <VBox alignment="CENTER_LEFT" spacing="0">
+                    <Label fx:id="sidebarTitle" styleClass="title-large" text="SYNC" />
+                    <Label fx:id="sidebarSubtitle" styleClass="auth-subtitle" text="Study Your Next Coursework" style="-fx-font-size: 10px; -fx-text-fill: #a0a0a0;"/>
+                </VBox>
+            </HBox>
+
+            <!-- MAIN MENU Section -->
+            <Label fx:id="menuTitle" styleClass="sidebar-section-heading" text="MAIN MENU">
+                <VBox.margin><Insets bottom="8.0" left="25.0" top="5.0" /></VBox.margin>
+            </Label>
+
+            <Button fx:id="btnDashboard" maxWidth="Infinity" styleClass="nav-btn, nav-btn-active, nav-btn-active-dashboard" text="Dashboard">
+                <graphic>
+                    <Label text="📊" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
+                </graphic>
+            </Button>
+            <Button fx:id="btnTasks" maxWidth="Infinity" onAction="#handleGoToTasks" styleClass="nav-btn" text="My Tasks">
+                <graphic>
+                    <Label text="📝" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
+                </graphic>
+            </Button>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- ACCOUNT Section -->
+            <Label fx:id="accountTitle" styleClass="sidebar-section-heading" text="ACCOUNT">
+                <VBox.margin><Insets bottom="8.0" left="25.0" /></VBox.margin>
+            </Label>
+
+            <Button fx:id="btnProfile" maxWidth="Infinity" onAction="#handleGoToProfile" styleClass="nav-btn" text="Profile">
+                <graphic>
+                    <Label text="👤" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
+                </graphic>
+            </Button>
+            <Button fx:id="btnLogout" maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="Logout">
+                <graphic>
+                    <Label text="🚪" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <!-- Header with Profile and Notification -->
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox spacing="2">
+                    <Label styleClass="title-large" text="Dashboard Overview" />
+                    <Label styleClass="subtitle" text="Real-time productivity metrics" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <!-- Profile Section -->
+                <HBox alignment="CENTER_RIGHT" spacing="15">
+                    <!-- Date Label -->
+                    <Label fx:id="dateLabel" styleClass="date-label" text="Nov 28, 2025" />
+                    
+                    <!-- Notification Button with Badge -->
+                    <StackPane>
+                        <Button fx:id="btnNotification" onAction="#handleNotification" text="🔔" 
+                                styleClass="btn-icon" 
+                                style="-fx-font-size: 24px; -fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 8;" />
+                        <Label fx:id="notificationBadge" text="0" visible="false"
+                               style="-fx-background-color: #ff4444; -fx-text-fill: white; -fx-background-radius: 12px; -fx-padding: 3 7; -fx-font-size: 11px; -fx-font-weight: bold;"
+                               StackPane.alignment="TOP_RIGHT">
+                            <StackPane.margin><Insets top="5" right="5" /></StackPane.margin>
+                        </Label>
+                    </StackPane>
+                    
+                    <!-- Profile Chip -->
+                    <HBox styleClass="profile-chip" alignment="CENTER_LEFT" spacing="10" onMouseClicked="#handleGoToProfile">
+                        <Label fx:id="avatarLabel" text="U" styleClass="profile-avatar"/>
+                        <VBox alignment="CENTER_LEFT">
+                            <Label fx:id="welcomeLabel" styleClass="profile-name" text="User" />
+                            <Label styleClass="profile-role" text="Team Member" />
+                        </VBox>
+                    </HBox>
+                </HBox>
+            </HBox>
+
+            <!-- TOP METRICS: TOTAL TASKS & COMPLETION RATE -->
+            <HBox spacing="20">
+                <!-- TOTAL TASKS Card -->
+                <VBox styleClass="card-total" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                    <Label text="📊 TOTAL TASKS" styleClass="card-title-colorful"/>
+                    <Label fx:id="totalTasksLabel" text="0" styleClass="card-value-colorful"/>
+                    <Label text="All tasks in the system" styleClass="card-subtitle-colorful"/>
+                </VBox>
+
+                <!-- COMPLETION RATE Card -->
+                <VBox styleClass="card-completion" maxWidth="Infinity" HBox.hgrow="ALWAYS">
+                    <Label text="📈 COMPLETION RATE" styleClass="card-title-colorful"/>
+                    <Label fx:id="completionRateLabel" text="0%" styleClass="card-value-colorful"/>
+                    <Label text="Tasks marked as done" styleClass="card-subtitle-colorful"/>
+                </VBox>
+            </HBox>
+
+            <!-- Priority Breakdown -->
+            <VBox spacing="10">
+                <Label text="Priority Breakdown" styleClass="section-title"/>
+                <HBox spacing="20">
+                    <VBox styleClass="card-high" HBox.hgrow="ALWAYS">
+                        <Label text="🔥 HIGH PRIORITY" styleClass="card-title-colorful"/>
+                        <Label fx:id="highPriorityLabel" text="0" styleClass="card-value-colorful"/>
+                    </VBox>
+                    <VBox styleClass="card-medium" HBox.hgrow="ALWAYS">
+                        <Label text="⚡ MEDIUM PRIORITY" styleClass="card-title-colorful"/>
+                        <Label fx:id="mediumPriorityLabel" text="0" styleClass="card-value-colorful"/>
+                    </VBox>
+                    <VBox styleClass="card-low" HBox.hgrow="ALWAYS">
+                        <Label text="✨ LOW PRIORITY" styleClass="card-title-colorful"/>
+                        <Label fx:id="lowPriorityLabel" text="0" styleClass="card-value-colorful"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- Charts -->
+            <GridPane hgap="20" vgap="20" VBox.vgrow="ALWAYS">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="40" />
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="60" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints percentHeight="100" vgrow="ALWAYS" />
+                </rowConstraints>
+
+                <VBox styleClass="chart-card" GridPane.columnIndex="0">
+                    <Label styleClass="card-title" text="Task Distribution" />
+                    <PieChart fx:id="statusPieChart" legendVisible="true" VBox.vgrow="ALWAYS" labelsVisible="false" />
+                </VBox>
+
+                <VBox styleClass="chart-card-neon" GridPane.columnIndex="1">
+                    <Label styleClass="card-title-neon" text="Productivity Stats" />
+                    <BarChart fx:id="productivityChart" legendVisible="false" VBox.vgrow="ALWAYS" verticalGridLinesVisible="false" horizontalGridLinesVisible="true" styleClass="neon-bar-chart">
+                        <xAxis><CategoryAxis label="Status" styleClass="neon-axis" /></xAxis>
+                        <yAxis><NumberAxis label="Count" styleClass="neon-axis" /></yAxis>
+                    </BarChart>
+                </VBox>
+            </GridPane>
+        </VBox>
+    </center>
+
+</BorderPane>
