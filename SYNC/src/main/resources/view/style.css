@@ -47,7 +47,6 @@
     font-weight: 700;
 }
 
-/* Improved subtitle with better readability while staying soft */
 .subtitle {
     -fx-text-fill: #d0d0e0;
     color: #d0d0e0;
@@ -116,6 +115,7 @@
     -fx-background-color: linear-gradient(to right, #5e6ad2, #4e5ac0);
     background: linear-gradient(to right, #5e6ad2, #4e5ac0);
     -fx-text-fill: white;
+    color: white;
     color: white;
     -fx-background-radius: 12;
     border-radius: 12px;
@@ -612,6 +612,11 @@
     background-color: transparent;
 }
 
+.chart-legend {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
 .chart-legend-item {
     -fx-text-fill: rgba(255, 255, 255, 0.65);
     color: rgba(255, 255, 255, 0.65);
@@ -1003,8 +1008,10 @@
 }
 
 .chart-legend-item {
-    -fx-text-fill: rgba(255, 255, 255, 0.65);
-    color: rgba(255, 255, 255, 0.65);
+    -fx-text-fill: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.3);
+    -fx-padding: 2px 20px;
+    padding: 2px 20px;
 }
 
 .axis {
@@ -1180,7 +1187,7 @@
 
 /* ==================== NEON BAR CHART DARK MODE ==================== */
 
-/* Neon Chart Card with Black Background */
+/* Theme-Matching Neon Chart Card with Black Background */
 .chart-card-neon {
     -fx-background-color: #000000;
     background-color: #000000;
@@ -1188,28 +1195,28 @@
     border-radius: 20px;
     -fx-padding: 24;
     padding: 24px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 255, 255, 0.5), 20, 0, 0, 0);
-    box-shadow: 0px 0px 20px 0px rgba(0, 255, 255, 0.5);
-    -fx-border-color: #00ffff;
-    border-color: #00ffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(137, 180, 250, 0.5), 20, 0, 0, 0);
+    box-shadow: 0px 0px 20px 0px rgba(137, 180, 250, 0.5);
+    -fx-border-color: #89b4fa;
+    border-color: #89b4fa;
     -fx-border-width: 2;
     border-width: 2px;
     border-style: solid;
 }
 
-/* Neon Title */
+/* Theme-Matching Neon Title */
 .card-title-neon {
-    -fx-text-fill: #00ffff;
-    color: #00ffff;
+    -fx-text-fill: #89b4fa;
+    color: #89b4fa;
     -fx-font-size: 18px;
     font-size: 18px;
     -fx-font-weight: 700;
     font-weight: 700;
-    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.8), 10, 0, 0, 0);
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(137, 180, 250, 0.8), 10, 0, 0, 0);
+    text-shadow: 0 0 10px rgba(137, 180, 250, 0.8);
 }
 
-/* Neon Bar Chart Background */
+/* Theme-Matching Neon Bar Chart Background */
 .neon-bar-chart {
     -fx-background-color: transparent;
     background-color: transparent;
@@ -1220,29 +1227,29 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Neon Axis Styling */
+/* Theme-Matching Neon Axis Styling */
 .neon-axis .axis-label {
-    -fx-text-fill: #00ffff;
-    color: #00ffff;
+    -fx-text-fill: #89b4fa;
+    color: #89b4fa;
     -fx-font-weight: 600;
     font-weight: 600;
 }
 
 .neon-axis .axis-tick-mark {
-    -fx-stroke: #00ffff;
-    stroke: #00ffff;
+    -fx-stroke: #89b4fa;
+    stroke: #89b4fa;
 }
 
 .neon-axis .axis {
-    -fx-tick-label-fill: #00ffff;
+    -fx-tick-label-fill: #89b4fa;
     -fx-font-size: 11px;
     font-size: 11px;
 }
 
-/* Neon Grid Lines */
+/* Theme-Matching Neon Grid Lines */
 .neon-bar-chart .chart-horizontal-grid-lines {
-    -fx-stroke: rgba(0, 255, 255, 0.3);
-    stroke: rgba(0, 255, 255, 0.3);
+    -fx-stroke: rgba(137, 180, 250, 0.3);
+    stroke: rgba(137, 180, 250, 0.3);
 }
 
 .neon-bar-chart .chart-vertical-grid-lines {
@@ -1250,33 +1257,33 @@
     stroke: transparent;
 }
 
-/* Neon Bar Colors - Cyan, Magenta, Green, Yellow */
+/* Theme-Matching Bar Colors - Blue, Orange, Green, Pink */
 .neon-bar-chart .default-color0.chart-bar {
-    -fx-bar-fill: linear-gradient(to top, #00ffff, #00cccc);
-    -fx-background-color: linear-gradient(to top, #00ffff, #00cccc);
-    background-color: #00cccc;
-    -fx-effect: dropshadow(gaussian, rgba(0, 255, 255, 0.8), 15, 0.7, 0, 0);
+    -fx-bar-fill: linear-gradient(to top, #89b4fa, #5e6ad2);
+    -fx-background-color: linear-gradient(to top, #89b4fa, #5e6ad2);
+    background-color: #5e6ad2;
+    -fx-effect: dropshadow(gaussian, rgba(137, 180, 250, 0.6), 15, 0.7, 0, 0);
 }
 
 .neon-bar-chart .default-color1.chart-bar {
-    -fx-bar-fill: linear-gradient(to top, #ff00ff, #cc00cc);
-    -fx-background-color: linear-gradient(to top, #ff00ff, #cc00cc);
-    background-color: #cc00cc;
-    -fx-effect: dropshadow(gaussian, rgba(255, 0, 255, 0.8), 15, 0.7, 0, 0);
+    -fx-bar-fill: linear-gradient(to top, #fab387, #e9904d);
+    -fx-background-color: linear-gradient(to top, #fab387, #e9904d);
+    background-color: #e9904d;
+    -fx-effect: dropshadow(gaussian, rgba(250, 179, 135, 0.6), 15, 0.7, 0, 0);
 }
 
 .neon-bar-chart .default-color2.chart-bar {
-    -fx-bar-fill: linear-gradient(to top, #00ff00, #00cc00);
-    -fx-background-color: linear-gradient(to top, #00ff00, #00cc00);
-    background-color: #00cc00;
-    -fx-effect: dropshadow(gaussian, rgba(0, 255, 0, 0.8), 15, 0.7, 0, 0);
+    -fx-bar-fill: linear-gradient(to top, #a6e3a1, #7ec97f);
+    -fx-background-color: linear-gradient(to top, #a6e3a1, #7ec97f);
+    background-color: #7ec97f;
+    -fx-effect: dropshadow(gaussian, rgba(166, 227, 161, 0.6), 15, 0.7, 0, 0);
 }
 
 .neon-bar-chart .default-color3.chart-bar {
-    -fx-bar-fill: linear-gradient(to top, #ffff00, #cccc00);
-    -fx-background-color: linear-gradient(to top, #ffff00, #cccc00);
-    background-color: #cccc00;
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.7, 0, 0);
+    -fx-bar-fill: linear-gradient(to top, #f38ba8, #d85c7a);
+    -fx-background-color: linear-gradient(to top, #f38ba8, #d85c7a);
+    background-color: #d85c7a;
+    -fx-effect: dropshadow(gaussian, rgba(243, 139, 168, 0.6), 15, 0.7, 0, 0);
 }
 
 /* Bars Hover Effect */
@@ -1285,4 +1292,19 @@
     opacity: 0.8;
     -fx-cursor: hand;
     cursor: hand;
+}
+
+/* ==================== TRANSPARENT CHART ==================== */
+.transparent-chart {
+    -fx-background-color: transparent;
+}
+
+.transparent-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* Transparent Chart Bar Colors - Matching Task Distribution Pie Chart */
+.transparent-chart .default-color0.chart-bar {
+    -fx-bar-fill: #b67171;
+    -fx-background-color: #b67171;
 }

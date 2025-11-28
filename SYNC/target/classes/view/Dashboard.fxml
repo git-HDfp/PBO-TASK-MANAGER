@@ -157,11 +157,11 @@
                     <PieChart fx:id="statusPieChart" legendVisible="true" VBox.vgrow="ALWAYS" labelsVisible="false" />
                 </VBox>
 
-                <VBox styleClass="chart-card-neon" GridPane.columnIndex="1">
-                    <Label styleClass="card-title-neon" text="Productivity Stats" />
-                    <BarChart fx:id="productivityChart" legendVisible="false" VBox.vgrow="ALWAYS" verticalGridLinesVisible="false" horizontalGridLinesVisible="true" styleClass="neon-bar-chart">
-                        <xAxis><CategoryAxis label="Status" styleClass="neon-axis" /></xAxis>
-                        <yAxis><NumberAxis label="Count" styleClass="neon-axis" /></yAxis>
+                <VBox styleClass="chart-card" GridPane.columnIndex="1">
+                    <Label styleClass="card-title" text="Productivity Stats" />
+                    <BarChart fx:id="productivityChart" legendVisible="false" VBox.vgrow="ALWAYS" verticalGridLinesVisible="false" horizontalGridLinesVisible="true" styleClass="transparent-chart">
+                        <xAxis><CategoryAxis label="Status" /></xAxis>
+                        <yAxis><NumberAxis label="Count" /></yAxis>
                     </BarChart>
                 </VBox>
             </GridPane>
