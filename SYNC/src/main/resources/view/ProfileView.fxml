@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" styleClass="root-background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taskmanager.controller.ProfileController">
+
+    <left>
+        <VBox fx:id="sidebar" prefWidth="260.0" styleClass="sidebar" spacing="8">
+            <padding><Insets top="30" bottom="30" left="0" right="0"/></padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <VBox.margin><Insets bottom="20.0" left="20.0" right="10.0"/></VBox.margin>
+                <Button fx:id="toggleBtn" onAction="#handleSidebarToggle" styleClass="btn-icon" text="☰" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
+                <VBox alignment="CENTER_LEFT" spacing="0">
+                    <Label fx:id="sidebarTitle" styleClass="title-large" text="SYNC" />
+                    <Label fx:id="sidebarSubtitle" styleClass="auth-subtitle" text="Study Your Next Coursework" style="-fx-font-size: 10px; -fx-text-fill: #a0a0a0;"/>
+                </VBox>
+            </HBox>
+
+            <!-- MAIN MENU Section -->
+            <Label styleClass="sidebar-section-heading" text="MAIN MENU">
+                <VBox.margin><Insets bottom="8.0" left="25.0" top="5.0" /></VBox.margin>
+            </Label>
+
+            <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#handleGoToDashboard" styleClass="nav-btn" text="📊  Dashboard" />
+            <Button fx:id="btnTasks" maxWidth="Infinity" onAction="#handleGoToTasks" styleClass="nav-btn" text="📝  My Tasks" />
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- ACCOUNT Section -->
+            <Label styleClass="sidebar-section-heading" text="ACCOUNT">
+                <VBox.margin><Insets bottom="8.0" left="25.0" /></VBox.margin>
+            </Label>
+
+            <Button fx:id="btnProfile" maxWidth="Infinity" styleClass="nav-btn, nav-btn-active, nav-btn-active-dashboard" text="👤  Profile" />
+            <Button fx:id="btnLogout" maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="🚪  Logout" />
+        </VBox>
+    </left>
+
+    <center>
+        <!-- ScrollPane untuk membuat konten bisa di-scroll -->
+        <ScrollPane fitToWidth="true" styleClass="column-scroll">
+            <VBox spacing="30" styleClass="content-area">
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <VBox spacing="2">
+                        <Label styleClass="title-large" text="My Profile" />
+                        <Label styleClass="subtitle" text="Manage your account information" />
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="welcomeLabel" styleClass="subtitle" text="Hi, User" />
+                </HBox>
+
+                <!-- Profile Information Card -->
+                <VBox styleClass="glass-panel" spacing="20" maxWidth="600">
+                    <padding><Insets top="30" bottom="30" left="30" right="30"/></padding>
+
+                    <Label text="📋 Account Information" styleClass="section-title"/>
+
+                    <!-- Username -->
+                    <VBox spacing="8">
+                        <Label text="Username" styleClass="form-label"/>
+                        <Label fx:id="usernameLabel" text="username" styleClass="title-large" style="-fx-font-size: 18px;"/>
+                    </VBox>
+
+                    <!-- Email -->
+                    <VBox spacing="8">
+                        <Label text="Email Address" styleClass="form-label"/>
+                        <TextField fx:id="emailField" styleClass="glass-input" promptText="Enter your email"/>
+                        <Label fx:id="emailStatusLabel" styleClass="error-label" visible="false"/>
+                    </VBox>
+
+                    <!-- Account Created -->
+                    <VBox spacing="8">
+                        <Label text="Member Since" styleClass="form-label"/>
+                        <Label fx:id="createdAtLabel" text="2024-01-01" styleClass="subtitle"/>
+                    </VBox>
+
+                    <!-- Save Button -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button fx:id="saveButton" text="💾 Save Changes" onAction="#handleSaveProfile" styleClass="btn-glass-primary"/>
+                        <Label fx:id="successLabel" text="✅ Profile updated successfully!" styleClass="subtitle" visible="false" style="-fx-text-fill: #a6da95;"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Change Password Card -->
+                <VBox styleClass="glass-panel" spacing="20" maxWidth="600">
+                    <padding><Insets top="30" bottom="30" left="30" right="30"/></padding>
+
+                    <Label text="🔒 Change Password" styleClass="section-title"/>
+
+                    <!-- Current Password -->
+                    <VBox spacing="8">
+                        <Label text="Current Password" styleClass="form-label"/>
+                        <PasswordField fx:id="currentPasswordField" styleClass="glass-input" promptText="Enter current password"/>
+                    </VBox>
+
+                    <!-- New Password -->
+                    <VBox spacing="8">
+                        <Label text="New Password" styleClass="form-label"/>
+                        <PasswordField fx:id="newPasswordField" styleClass="glass-input" promptText="Enter new password"/>
+                    </VBox>
+
+                    <!-- Confirm New Password -->
+                    <VBox spacing="8">
+                        <Label text="Confirm New Password" styleClass="form-label"/>
+                        <PasswordField fx:id="confirmPasswordField" styleClass="glass-input" promptText="Confirm new password"/>
+                        <Label fx:id="passwordErrorLabel" styleClass="error-label" visible="false"/>
+                    </VBox>
+
+                    <!-- Change Password Button -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button fx:id="changePasswordButton" text="🔑 Change Password" onAction="#handleChangePassword" styleClass="btn-glass-primary"/>
+                        <Label fx:id="passwordSuccessLabel" text="✅ Password changed successfully!" styleClass="subtitle" visible="false" style="-fx-text-fill: #a6da95;"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Statistics Card -->
+                <VBox styleClass="glass-panel" spacing="15" maxWidth="600">
+                    <padding><Insets top="30" bottom="30" left="30" right="30"/></padding>
+
+                    <Label text="📈 Your Statistics" styleClass="section-title"/>
+
+                    <HBox spacing="30">
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Total Tasks" styleClass="subtitle"/>
+                            <Label fx:id="totalTasksLabel" text="0" styleClass="card-value-colorful" style="-fx-font-size: 28px;"/>
+                        </VBox>
+                        
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Completed" styleClass="subtitle"/>
+                            <Label fx:id="completedTasksLabel" text="0" styleClass="card-value-colorful" style="-fx-font-size: 28px; -fx-text-fill: #a6da95;"/>
+                        </VBox>
+                        
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="In Progress" styleClass="subtitle"/>
+                            <Label fx:id="inProgressTasksLabel" text="0" styleClass="card-value-colorful" style="-fx-font-size: 28px; -fx-text-fill: #fab387;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Extra spacing at bottom for better scroll experience -->
+                <Region minHeight="30" />
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

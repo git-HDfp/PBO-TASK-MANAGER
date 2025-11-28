@@ -1,0 +1,187 @@
+package com.taskmanager.controller;
+
+import com.taskmanager.model.Task;
+import com.taskmanager.utils.CSVHelper;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.chart.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.util.List;
+
+public class DashboardController {
+
+    @FXML
+    private BorderPane rootPane;
+    @FXML
+    private Label welcomeLabel;
+    @FXML
+    private Label dateLabel;
+    @FXML
+    private Label avatarLabel;
+
+    @FXML
+    private Label totalTasksLabel;
+    @FXML
+    private Label highPriorityLabel;
+    @FXML
+    private Label mediumPriorityLabel;
+    @FXML
+    private Label lowPriorityLabel;
+    @FXML
+    private Label completionRateLabel;
+
+    @FXML
+    private PieChart statusPieChart;
+    @FXML
+    private BarChart<String, Number> productivityChart;
+
+    @FXML
+    private VBox sidebar;
+    @FXML
+    private Label sidebarTitle;
+    @FXML
+    private Label menuTitle;
+    @FXML
+    private Label accountTitle;
+
+    @FXML
+    private Button btnDashboard;
+    @FXML
+    private Button btnTasks;
+    @FXML
+    private Button btnProfile;
+    @FXML
+    private Button btnLogout;
+
+    private boolean isSidebarCollapsed = false;
+    private static final double SIDEBAR_EXPANDED_WIDTH = 260;
+    private static final double SIDEBAR_COLLAPSED_WIDTH = 70;
+
+    @FXML
+    public void initialize() {
+        // Smooth fade in animation
+        rootPane.setOpacity(0);
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(500), rootPane);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+
+        // Set username
+        String username = LoginController.currentUsername != null ? LoginController.currentUsername : "User";
+        welcomeLabel.setText(username);
+
+        // Set date
+        dateLabel.setText(
+                java.time.LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+
+        // Set avatar
+        if (username != null && !username.isEmpty()) {
+            avatarLabel.setText(username.substring(0, 1).toUpperCase());
+        }
+
+        // Set initial sidebar state
+        if (sidebar != null) {
+            sidebar.setPrefWidth(SIDEBAR_EXPANDED_WIDTH);
+            if (sidebarTitle != null)
+                sidebarTitle.setVisible(true);
+            if (menuTitle != null)
+                menuTitle.setVisible(true);
+            if (accountTitle != null)
+                accountTitle.setVisible(true);
+
+            // Ensure buttons are expanded
+            ContentDisplay contentDisplay = ContentDisplay.LEFT;
+            if (btnDashboard != null)
+                btnDashboard.setContentDisplay(contentDisplay);
+            if (btnTasks != null)
+                btnTasks.setContentDisplay(contentDisplay);
+            if (btnProfile != null)
+                btnProfile.setContentDisplay(contentDisplay);
+            if (btnLogout != null)
+                btnLogout.setContentDisplay(contentDisplay);
+        }
+
+        // Load dashboard data
+        loadDashboardData();
+    }
+
+    @FXML
+    private void handleSidebarToggle() {
+        isSidebarCollapsed = !isSidebarCollapsed;
+
+        // Animate width
+        Timeline timeline = new Timeline();
+        KeyValue widthValue = new KeyValue(sidebar.prefWidthProperty(),
+                isSidebarCollapsed ? SIDEBAR_COLLAPSED_WIDTH : SIDEBAR_EXPANDED_WIDTH,
+                Interpolator.EASE_BOTH);
+
+        KeyFrame frame = new KeyFrame(Duration.millis(300), widthValue);
+        timeline.getKeyFrames().add(frame);
+        timeline.play();
+
+        // Toggle visibility of labels
+        if (sidebarTitle != null)
+            sidebarTitle.setVisible(!isSidebarCollapsed);
+        if (menuTitle != null)
+            menuTitle.setVisible(!isSidebarCollapsed);
+        if (accountTitle != null)
+            accountTitle.setVisible(!isSidebarCollapsed);
+
+        // Toggle button text visibility
+        ContentDisplay contentDisplay = isSidebarCollapsed ? ContentDisplay.GRAPHIC_ONLY : ContentDisplay.LEFT;
+        if (btnDashboard != null)
+            btnDashboard.setContentDisplay(contentDisplay);
+        if (btnTasks != null)
+            btnTasks.setContentDisplay(contentDisplay);
+        if (btnProfile != null)
+            btnProfile.setContentDisplay(contentDisplay);
+        if (btnLogout != null)
+            animateAndChangeScene("/view/TasksView.fxml");
+    }
+
+    @FXML
+    private void handleGoToProfile() {
+        animateAndChangeScene("/view/ProfileView.fxml");
+    }
+
+    @FXML
+    private void handleLogout() {
+        animateAndChangeScene("/view/Login.fxml");
+    }
+
+    // Optimized transition with 250ms for smoother feel
+    private void animateAndChangeScene(String fxmlPath) {
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(250), rootPane);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+
+        fadeOut.setOnFinished(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                Parent nextRoot = loader.load();
+
+                Stage stage = (Stage) rootPane.getScene().getWindow();
+                stage.getScene().setRoot(nextRoot);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.err.println("Failed to load page: " + fxmlPath);
+            }
+        });
+
+        fadeOut.play();
+    }
+}

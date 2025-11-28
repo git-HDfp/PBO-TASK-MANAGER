@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20" styleClass="editor-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taskmanager.controller.TaskEditorController">
+
+    <padding>
+        <Insets bottom="30" left="30" right="30" top="30" />
+    </padding>
+
+    <Label fx:id="titleLabel" styleClass="editor-title" text="Task Details">
+        <font>
+            <Font name="System Bold" size="24" />
+        </font>
+    </Label>
+
+    <Label fx:id="errorLabel" managed="false" styleClass="error-label" visible="false" wrapText="true" />
+
+    <VBox spacing="15" VBox.vgrow="ALWAYS">
+        <VBox spacing="5">
+            <Label styleClass="form-label-dark" text="Task Title" />
+            <TextField fx:id="titleField" promptText="Enter task title" styleClass="glass-input-light" />
+        </VBox>
+
+        <VBox spacing="5">
+            <Label styleClass="form-label-dark" text="Description" />
+            <TextArea fx:id="descriptionArea" prefRowCount="3" promptText="Enter task description" styleClass="glass-textarea-light" wrapText="true" />
+        </VBox>
+
+        <!-- GANTI: Category menjadi Subject -->
+        <HBox spacing="15">
+            <VBox HBox.hgrow="ALWAYS" spacing="5">
+                <Label styleClass="form-label-dark" text="Subject" />
+                <ComboBox fx:id="subjectComboBox" maxWidth="Infinity" styleClass="combo-glass-light" />
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS" spacing="5">
+                <Label styleClass="form-label-dark" text="Priority" />
+                <ComboBox fx:id="priorityComboBox" maxWidth="Infinity" styleClass="combo-glass-light" />
+            </VBox>
+        </HBox>
+
+        <HBox spacing="15">
+            <VBox HBox.hgrow="ALWAYS" spacing="5">
+                <Label styleClass="form-label-dark" text="Status" />
+                <ComboBox fx:id="statusComboBox" maxWidth="Infinity" styleClass="combo-glass-light" />
+            </VBox>
+
+            <VBox HBox.hgrow="ALWAYS" spacing="5">
+                <Label styleClass="form-label-dark" text="Deadline Date" />
+                <DatePicker fx:id="deadlinePicker" maxWidth="Infinity" promptText="Pick Date" styleClass="glass-input-light" />
+            </VBox>
+
+            <VBox prefWidth="100" spacing="5">
+                <Label styleClass="form-label-dark" text="Time (HH:mm)" />
+                <TextField fx:id="timeField" alignment="CENTER" promptText="23:59" styleClass="glass-input-light" text="23:59" />
+            </VBox>
+        </HBox>
+
+        <VBox spacing="5">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label styleClass="form-label-dark" text="Progress" />
+                <Label fx:id="progressLabel" styleClass="progress-label" text="0%">
+                    <font>
+                        <Font name="System Bold" size="13" />
+                    </font>
+                </Label>
+            </HBox>
+            <Slider fx:id="progressSlider" blockIncrement="5" max="100" min="0" styleClass="slider-glass" value="0" />
+        </VBox>
+    </VBox>
+
+    <HBox alignment="CENTER_RIGHT" spacing="15">
+        <Button fx:id="cancelButton" onAction="#handleCancel" prefHeight="40" prefWidth="120" styleClass="btn-glass-secondary" text="Cancel">
+            <font>
+                <Font size="13" />
+            </font>
+        </Button>
+
+        <Button fx:id="saveButton" onAction="#handleSave" prefHeight="40" prefWidth="120" styleClass="btn-glass-primary" text="Save Task">
+            <font>
+                <Font name="System Bold" size="13" />
+            </font>
+        </Button>
+    </HBox>
+</VBox>
