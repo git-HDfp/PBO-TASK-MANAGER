@@ -183,8 +183,8 @@
 .nav-btn {
     -fx-background-color: transparent;
     background-color: transparent;
-    -fx-text-fill: #a0a0b0;
-    color: #a0a0b0;
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
     -fx-alignment: CENTER_LEFT;
     text-align: left;
     -fx-font-size: 16px;

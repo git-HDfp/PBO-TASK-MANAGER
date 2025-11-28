@@ -30,17 +30,9 @@
                 <VBox.margin><Insets bottom="8.0" left="25.0" top="5.0" /></VBox.margin>
             </Label>
 
-            <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#handleGoToDashboard" styleClass="nav-btn" text="Dashboard">
-                <graphic>
-                    <Label text="📊" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
-            
-            <Button fx:id="btnTasks" maxWidth="Infinity" onAction="#handleMyTasks" styleClass="nav-btn, nav-btn-active, nav-btn-active-tasks" text="My Tasks">
-                <graphic>
-                    <Label text="📝" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
+            <Button fx:id="btnDashboard" maxWidth="Infinity" onAction="#handleGoToDashboard" styleClass="nav-btn" text="📊  Dashboard" />
+
+            <Button fx:id="btnTasks" maxWidth="Infinity" onAction="#handleMyTasks" styleClass="nav-btn, nav-btn-active, nav-btn-active-tasks" text="📝  My Tasks" />
 
             <!-- SUBJECTS Section -->
             <Label fx:id="subjectsTitle" styleClass="sidebar-section-heading" text="SUBJECTS">
@@ -64,16 +56,8 @@
                 <VBox.margin><Insets bottom="8.0" left="25.0" /></VBox.margin>
             </Label>
 
-            <Button fx:id="btnProfile" maxWidth="Infinity" onAction="#handleGoToProfile" styleClass="nav-btn" text="Profile">
-                <graphic>
-                    <Label text="👤" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
-            <Button fx:id="btnLogout" maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="Logout">
-                <graphic>
-                    <Label text="🚪" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
+            <Button fx:id="btnProfile" maxWidth="Infinity" onAction="#handleGoToProfile" styleClass="nav-btn" text="👤  Profile" />
+            <Button fx:id="btnLogout" maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="🚪  Logout" />
         </VBox>
     </left>
 

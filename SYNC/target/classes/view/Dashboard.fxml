@@ -37,16 +37,8 @@
                 <VBox.margin><Insets bottom="8.0" left="25.0" top="5.0" /></VBox.margin>
             </Label>
 
-            <Button fx:id="btnDashboard" maxWidth="Infinity" styleClass="nav-btn, nav-btn-active, nav-btn-active-dashboard" text="Dashboard">
-                <graphic>
-                    <Label text="📊" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
-            <Button fx:id="btnTasks" maxWidth="Infinity" onAction="#handleGoToTasks" styleClass="nav-btn" text="My Tasks">
-                <graphic>
-                    <Label text="📝" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
+            <Button fx:id="btnDashboard" maxWidth="Infinity" styleClass="nav-btn, nav-btn-active, nav-btn-active-dashboard" text="📊  Dashboard" />
+            <Button fx:id="btnTasks" maxWidth="Infinity" onAction="#handleGoToTasks" styleClass="nav-btn" text="📝  My Tasks" />
 
             <Region VBox.vgrow="ALWAYS" />
 
@@ -55,16 +47,8 @@
                 <VBox.margin><Insets bottom="8.0" left="25.0" /></VBox.margin>
             </Label>
 
-            <Button fx:id="btnProfile" maxWidth="Infinity" onAction="#handleGoToProfile" styleClass="nav-btn" text="Profile">
-                <graphic>
-                    <Label text="👤" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
-            <Button fx:id="btnLogout" maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="Logout">
-                <graphic>
-                    <Label text="🚪" style="-fx-font-size: 18px; -fx-padding: 0 10 0 0;" />
-                </graphic>
-            </Button>
+            <Button fx:id="btnProfile" maxWidth="Infinity" onAction="#handleGoToProfile" styleClass="nav-btn" text="👤  Profile" />
+            <Button fx:id="btnLogout" maxWidth="Infinity" onAction="#handleLogout" styleClass="nav-btn, logout-btn" text="🚪  Logout" />
         </VBox>
     </left>
 
