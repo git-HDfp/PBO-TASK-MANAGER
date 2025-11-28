@@ -1,9 +1,33 @@
 ﻿/* ==================== DARK NEON THEME - POLISHED & REFINED ==================== */
 
+/* --- FONT FACES --- */
+@font-face {
+    font-family: "Montserrat";
+    src: url("../font/Montserrat-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("../font/Montserrat-Medium.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("../font/PlusJakartaSans-SemiBold.ttf");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("../font/PlusJakartaSans-Bold.ttf");
+    font-weight: 700;
+}
+
 /* --- ROOT VARIABLES & BASE --- */
 .root {
-    -fx-font-family: "Google Sans", "Segoe UI", system-ui, sans-serif;
-    font-family: "Google Sans", "Segoe UI", system-ui, sans-serif;
+    -fx-font-family: "Montserrat", "Plus Jakarta Sans", sans-serif;
+    font-family: "Montserrat", "Plus Jakarta Sans", sans-serif;
     -fx-background-color: #13141f;
     background-color: #13141f;
 }
