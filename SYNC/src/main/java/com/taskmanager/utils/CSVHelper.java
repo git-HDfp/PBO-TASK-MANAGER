@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVHelper {
-    private static final String DATA_DIR = "data";
+    private static final String DATA_DIR = "SYNC/data";
     private static final String USERS_FILE = DATA_DIR + "/users.csv";
     private static final String TASKS_FILE = DATA_DIR + "/tasks.csv";
 

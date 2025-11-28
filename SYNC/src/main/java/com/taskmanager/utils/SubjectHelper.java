@@ -1,11 +1,10 @@
 package com.taskmanager.utils;
 
 import java.io.*;
-import java.nio.file.*;
 import java.util.*;
 
 public class SubjectHelper {
-    private static final String SUBJECTS_FILE = "data/subjects.txt";
+    private static final String SUBJECTS_FILE = "SYNC/data/subjects.txt";
 
     // Subject default (mata kuliah)
     private static final List<String> DEFAULT_SUBJECTS = Arrays.asList(
