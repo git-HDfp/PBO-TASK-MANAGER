@@ -16,7 +16,7 @@
 
         <!-- Logo/Title Section -->
         <VBox alignment="CENTER" spacing="8">
-            <Label text="🎯" style="-fx-font-size: 48px;"/>
+            <Label text="🎯" style="-fx-font-size: 48px;" styleClass="auth-icon"/>
             <Label text="SYNC" styleClass="auth-title">
                 <font>
                     <Font name="Google Sans" size="32"/>
