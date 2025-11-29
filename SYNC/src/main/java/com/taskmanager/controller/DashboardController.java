@@ -260,15 +260,14 @@ public class DashboardController {
             }
 
             ScrollPane scrollPane = new ScrollPane(tasksContainer);
-            scrollPane.setStyle(
-                    "-fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent;");
             scrollPane.setFitToWidth(true);
             scrollPane.setPrefHeight(300);
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            // Modern scrollbar styling with hover effects
-            scrollPane.setStyle(scrollPane.getStyle()
-                    + " -fx-vbar-policy: as-needed; -fx-hbar-policy: never; -fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent; -fx-scroll-bar: vertical { -fx-background-color: rgba(255,255,255,0.05); -fx-border-color: transparent; -fx-thumb-color: #2ecc71; -fx-thumb-radius: 10; -fx-thumb-border-radius: 10; -fx-thumb-border-color: transparent; -fx-thumb-background-radius: 10; -fx-track-color: transparent; -fx-thumb-hover-color: #27ae60; -fx-thumb-pressed-color: #229954; -fx-thumb-opacity: 0.8; -fx-thumb-hover-opacity: 1.0; }");
+
+            // Apply style class for modern scrollbar
+            scrollPane.getStyleClass().add("urgent-scroll");
+
             container.getChildren().add(scrollPane);
 
             Label encouragementLabel = new Label("Let's get these tasks done! 💪");
@@ -291,6 +290,7 @@ public class DashboardController {
             container.getChildren().addAll(btnBox, closeBox);
 
             Scene scene = new Scene(container, 600, 500);
+            scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
             dialog.setScene(scene);
             dialog.showAndWait();
         }
