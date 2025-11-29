@@ -8,7 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class RegisterController {
@@ -217,32 +224,154 @@ public class RegisterController {
     }
 
     private void showSuccessAndRedirect(String username) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Registration Successful");
-        alert.setHeaderText("Welcome to Task Management!");
+        // Create custom dialog stage
+        Stage dialogStage = new Stage();
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+        dialogStage.setResizable(false);
 
-        // Add a modern checkmark icon with theme colors
-        Label checkmark = new Label("✓");
-        checkmark.setStyle(
-                "-fx-font-size: 48px; -fx-text-fill: #5e6ad2; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(94, 106, 210, 0.6), 8, 0, 0, 0);");
-        alert.setGraphic(checkmark);
+        // Main container with glassmorphism effect
+        VBox content = new VBox(20);
+        content.setAlignment(Pos.CENTER);
+        content.setPadding(new Insets(40));
+        content.setPrefWidth(400);
+        // Modern dark theme with subtle gradient and glass effect
+        content.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #1e293b, #0f172a); " +
+                        "-fx-background-radius: 24; " +
+                        "-fx-border-color: rgba(255, 255, 255, 0.1); " +
+                        "-fx-border-width: 1px; " +
+                        "-fx-border-radius: 24; " +
+                        "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 30, 0, 0, 15);");
 
-        alert.setContentText(
-                "Account created successfully for: " + username + "\n\nYou will now be redirected to the login page.");
+        // Success Icon (Checkmark in a circle)
+        Label checkIcon = new Label("✓");
+        checkIcon.setStyle(
+                "-fx-font-size: 48px; " +
+                        "-fx-text-fill: #4ade80; " + // Bright green
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Segoe UI Emoji', 'Arial';");
 
-        // Customize the dialog with theme colors
-        alert.getDialogPane().setStyle(
-                "-fx-background-color: #1e2032; -fx-border-color: #5e6ad2; -fx-border-width: 2px; -fx-border-radius: 20; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 30, 0, 0, 15);");
-        alert.getDialogPane().lookupButton(ButtonType.OK).setStyle(
-                "-fx-background-color: linear-gradient(to right, #5e6ad2, #4e5ac0); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(94, 106, 210, 0.4), 15, 0, 0, 5);");
+        // Circle container for the checkmark
+        VBox iconContainer = new VBox(checkIcon);
+        iconContainer.setAlignment(Pos.CENTER);
+        iconContainer.setMaxSize(90, 90);
+        iconContainer.setMinSize(90, 90);
+        iconContainer.setStyle(
+                "-fx-background-color: rgba(74, 222, 128, 0.1); " +
+                        "-fx-background-radius: 45; " +
+                        "-fx-border-color: rgba(74, 222, 128, 0.2); " +
+                        "-fx-border-radius: 45; " +
+                        "-fx-border-width: 1px;");
 
-        // Style the header and content text
-        alert.getDialogPane().lookup(".header-panel")
-                .setStyle("-fx-background-color: #1e2032; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-        alert.getDialogPane().lookup(".content").setStyle("-fx-text-fill: #d0d0e0;");
+        // Title
+        Label titleLabel = new Label("Welcome Aboard!");
+        titleLabel.setStyle(
+                "-fx-text-fill: white; " +
+                        "-fx-font-size: 26px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Segoe UI', 'Arial';");
 
-        alert.showAndWait();
-        handleBackToLogin();
+        // Subtitle
+        Label subtitleLabel = new Label("Your account has been created successfully");
+        subtitleLabel.setStyle(
+                "-fx-text-fill: #94a3b8; " + // Slate-400
+                        "-fx-font-size: 14px; " +
+                        "-fx-font-family: 'Segoe UI', 'Arial';");
+
+        // User Profile Card
+        VBox userCard = new VBox(12);
+        userCard.setAlignment(Pos.CENTER);
+        userCard.setPadding(new Insets(20, 40, 20, 40));
+        userCard.setStyle(
+                "-fx-background-color: rgba(255, 255, 255, 0.03); " +
+                        "-fx-background-radius: 16; " +
+                        "-fx-border-color: rgba(255, 255, 255, 0.05); " +
+                        "-fx-border-radius: 16;");
+
+        // Avatar placeholder (First letter of username)
+        String initial = (username != null && !username.isEmpty()) ? username.substring(0, 1).toUpperCase() : "?";
+        Label avatarLabel = new Label(initial);
+        avatarLabel.setStyle(
+                "-fx-text-fill: white; " +
+                        "-fx-font-size: 24px; " +
+                        "-fx-font-weight: bold;");
+
+        VBox avatarCircle = new VBox(avatarLabel);
+        avatarCircle.setAlignment(Pos.CENTER);
+        avatarCircle.setMaxSize(50, 50);
+        avatarCircle.setMinSize(50, 50);
+        avatarCircle.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #6366f1, #8b5cf6); " +
+                        "-fx-background-radius: 25; " +
+                        "-fx-effect: dropshadow(gaussian, rgba(99, 102, 241, 0.4), 10, 0, 0, 5);");
+
+        Label userLabel = new Label(username);
+        userLabel.setStyle(
+                "-fx-text-fill: white; " +
+                        "-fx-font-size: 18px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-font-family: 'Segoe UI', 'Arial';");
+
+        userCard.getChildren().addAll(avatarCircle, userLabel);
+
+        // Loading/Redirect message
+        Label loadingLabel = new Label("Redirecting to login...");
+        loadingLabel.setStyle(
+                "-fx-text-fill: #64748b; " + // Slate-500
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-style: italic;");
+
+        content.getChildren().addAll(iconContainer, titleLabel, subtitleLabel, userCard, loadingLabel);
+
+        // Scene setup
+        Scene scene = new Scene(content);
+        scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+        dialogStage.setScene(scene);
+
+        // Animations
+        // 1. Pop in effect for the whole card
+        ScaleTransition scaleIn = new ScaleTransition(Duration.millis(300), content);
+        scaleIn.setFromX(0.9);
+        scaleIn.setFromY(0.9);
+        scaleIn.setToX(1.0);
+        scaleIn.setToY(1.0);
+
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(300), content);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+
+        // 2. Icon bounce
+        ScaleTransition iconBounce = new ScaleTransition(Duration.millis(600), iconContainer);
+        iconBounce.setFromX(0.0);
+        iconBounce.setFromY(0.0);
+        iconBounce.setToX(1.0);
+        iconBounce.setToY(1.0);
+        iconBounce.setDelay(Duration.millis(100));
+
+        // Play animations
+        scaleIn.play();
+        fadeIn.play();
+        iconBounce.play();
+
+        // Auto-close logic
+        final int[] countdown = { 3 };
+        loadingLabel.setText("Redirecting to login in " + countdown[0] + "s...");
+
+        PauseTransition countdownTimer = new PauseTransition(Duration.seconds(1));
+        countdownTimer.setOnFinished(e -> {
+            countdown[0]--;
+            if (countdown[0] > 0) {
+                loadingLabel.setText("Redirecting to login in " + countdown[0] + "s...");
+                countdownTimer.play();
+            } else {
+                dialogStage.close();
+                handleBackToLogin();
+            }
+        });
+        countdownTimer.play();
+
+        dialogStage.show();
     }
 
     private void showError(String message) {
