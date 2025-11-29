@@ -126,18 +126,29 @@ public class ProfileController {
 
         currentPasswordField.textProperty().addListener((obs, old, newVal) -> {
             passwordErrorLabel.setVisible(false);
-            passwordSuccessLabel.setVisible(false);
+            // Don't hide success message while typing
+        });
+
+        // Real-time current password validation
+        currentPasswordField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (!isNowFocused && !currentPasswordField.getText().isEmpty()) {
+                validateCurrentPassword();
+            }
         });
 
         newPasswordField.textProperty().addListener((obs, old, newVal) -> {
             passwordErrorLabel.setVisible(false);
-            passwordSuccessLabel.setVisible(false);
+            // Don't hide success message while typing
         });
 
         confirmPasswordField.textProperty().addListener((obs, old, newVal) -> {
             passwordErrorLabel.setVisible(false);
-            passwordSuccessLabel.setVisible(false);
+            // Don't hide success message while typing
         });
+
+        // Real-time password matching validation
+        newPasswordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
+        confirmPasswordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
     }
 
     @FXML
@@ -309,10 +320,14 @@ public class ProfileController {
         if (CSVHelper.updateUser(currentUser)) {
             showSuccess("Password changed successfully!", passwordSuccessLabel);
 
-            // Clear password fields
-            currentPasswordField.clear();
-            newPasswordField.clear();
-            confirmPasswordField.clear();
+            // Clear password fields after a short delay to allow success message to show
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished(e -> {
+                currentPasswordField.clear();
+                newPasswordField.clear();
+                confirmPasswordField.clear();
+            });
+            delay.play();
         } else {
             showError("Failed to change password", passwordErrorLabel);
         }
@@ -392,6 +407,52 @@ public class ProfileController {
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(e -> successLabel.setVisible(false));
         pause.play();
+    }
+
+    /**
+     * Validate current password in real-time
+     */
+    private void validateCurrentPassword() {
+        String currentPassword = currentPasswordField.getText();
+        if (!currentPassword.isEmpty() && !currentUser.verifyPassword(currentPassword)) {
+            showPersistentError("Current password is incorrect", passwordErrorLabel);
+        } else if (currentUser.verifyPassword(currentPassword)
+                && passwordErrorLabel.getText().equals("❌ Current password is incorrect")) {
+            clearError(passwordErrorLabel);
+        }
+    }
+
+    /**
+     * Validate password matching in real-time
+     */
+    private void validatePasswords() {
+        String newPassword = newPasswordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        if (!newPassword.isEmpty() && !confirmPassword.isEmpty() && !newPassword.equals(confirmPassword)) {
+            showPersistentError("New passwords do not match", passwordErrorLabel);
+        } else if (newPassword.equals(confirmPassword)
+                && passwordErrorLabel.getText().equals("❌ New passwords do not match")) {
+            clearError(passwordErrorLabel);
+        }
+    }
+
+    /**
+     * Show persistent error message (no auto-hide)
+     */
+    private void showPersistentError(String message, Label errorLabel) {
+        errorLabel.setText("❌ " + message);
+        errorLabel.setVisible(true);
+        // No auto-hide for persistent errors
+    }
+
+    /**
+     * Clear error message
+     */
+    private void clearError(Label errorLabel) {
+        if (errorLabel.isVisible()) {
+            errorLabel.setVisible(false);
+        }
     }
 
     /**
