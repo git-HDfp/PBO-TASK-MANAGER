@@ -61,6 +61,10 @@ public class RegisterController {
                 validatePassword();
             }
         });
+
+        // Real-time password matching validation
+        passwordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
+        confirmPasswordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
     }
 
     @FXML
@@ -201,12 +205,41 @@ public class RegisterController {
         }
     }
 
+    private void validatePasswords() {
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        if (!password.isEmpty() && !confirmPassword.isEmpty() && !password.equals(confirmPassword)) {
+            showPersistentError("Passwords do not match");
+        } else if (password.equals(confirmPassword) && errorLabel.getText().equals("Passwords do not match")) {
+            clearError();
+        }
+    }
+
     private void showSuccessAndRedirect(String username) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Registration Successful");
         alert.setHeaderText("Welcome to Task Management!");
+
+        // Add a modern checkmark icon with theme colors
+        Label checkmark = new Label("✓");
+        checkmark.setStyle(
+                "-fx-font-size: 48px; -fx-text-fill: #5e6ad2; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(94, 106, 210, 0.6), 8, 0, 0, 0);");
+        alert.setGraphic(checkmark);
+
         alert.setContentText(
                 "Account created successfully for: " + username + "\n\nYou will now be redirected to the login page.");
+
+        // Customize the dialog with theme colors
+        alert.getDialogPane().setStyle(
+                "-fx-background-color: #1e2032; -fx-border-color: #5e6ad2; -fx-border-width: 2px; -fx-border-radius: 20; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 30, 0, 0, 15);");
+        alert.getDialogPane().lookupButton(ButtonType.OK).setStyle(
+                "-fx-background-color: linear-gradient(to right, #5e6ad2, #4e5ac0); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(94, 106, 210, 0.4), 15, 0, 0, 5);");
+
+        // Style the header and content text
+        alert.getDialogPane().lookup(".header-panel")
+                .setStyle("-fx-background-color: #1e2032; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
+        alert.getDialogPane().lookup(".content").setStyle("-fx-text-fill: #d0d0e0;");
 
         alert.showAndWait();
         handleBackToLogin();
@@ -220,6 +253,12 @@ public class RegisterController {
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished(e -> errorLabel.setVisible(false));
         pause.play();
+    }
+
+    private void showPersistentError(String message) {
+        errorLabel.setText(message);
+        errorLabel.setVisible(true);
+        // No auto-hide for persistent errors
     }
 
     private void clearError() {

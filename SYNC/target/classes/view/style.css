@@ -773,6 +773,20 @@
     background-color: transparent;
 }
 
+.error-label {
+    -fx-text-fill: #ff0000;
+    color: #ff0000;
+    -fx-font-size: 12px;
+    font-size: 12px;
+    -fx-font-weight: 500;
+    font-weight: 500;
+}
+
+.register-icon {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+}
+
 .chart-legend {
     -fx-background-color: transparent;
     background-color: transparent;

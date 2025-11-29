@@ -20,7 +20,7 @@
 
         <!-- Header Section -->
         <VBox alignment="CENTER" spacing="8">
-            <Label text="✨" style="-fx-font-size: 48px;"/>
+            <Label styleClass="register-icon" text="✨" style="-fx-font-size: 48px;"/>
             <Label styleClass="auth-title" text="Create Account">
                 <font>
                     <Font name="Google Sans" size="32" />
