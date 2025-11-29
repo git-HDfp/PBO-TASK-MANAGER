@@ -25,6 +25,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.scene.control.ScrollPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -64,6 +65,8 @@ public class TasksViewController {
     // Subject-related fields
     @FXML
     private Label subjectsTitle;
+    @FXML
+    private ScrollPane subjectsScrollPane;
     @FXML
     private VBox subjectsContainer;
     @FXML
@@ -371,6 +374,13 @@ public class TasksViewController {
             stage.getScene().setRoot(root);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void applyModernScrollbarStyling(ScrollPane scrollPane) {
+        if (scrollPane != null) {
+            scrollPane.setStyle(scrollPane.getStyle()
+                    + " -fx-vbar-policy: as-needed; -fx-hbar-policy: never; -fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent; -fx-scroll-bar: vertical { -fx-background-color: rgba(255,255,255,0.05); -fx-border-color: transparent; -fx-thumb-color: #2ecc71; -fx-thumb-radius: 10; -fx-thumb-border-radius: 10; -fx-thumb-border-color: transparent; -fx-thumb-background-radius: 10; -fx-track-color: transparent; -fx-thumb-hover-color: #27ae60; -fx-thumb-pressed-color: #229954; -fx-thumb-opacity: 0.8; -fx-thumb-hover-opacity: 1.0; }");
         }
     }
 }

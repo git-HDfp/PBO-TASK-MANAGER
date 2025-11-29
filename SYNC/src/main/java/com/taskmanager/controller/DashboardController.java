@@ -22,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -190,10 +191,14 @@ public class DashboardController {
             DateTimeFormatter dayFormatter = DateTimeFormatter.ofPattern("EEEE, dd MMM - HH:mm",
                     new Locale("id", "ID"));
 
+            VBox tasksContainer = new VBox(10);
+            tasksContainer.setStyle("-fx-background-color: transparent;");
+
             for (Task task : urgentTasks) {
                 HBox taskRow = new HBox(15);
                 taskRow.setAlignment(Pos.CENTER_LEFT);
-                taskRow.setStyle("-fx-background-color: #25274d; -fx-padding: 15; -fx-background-radius: 8;");
+                taskRow.setStyle(
+                        "-fx-background-color: #25274d; -fx-padding: 15; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 2);");
 
                 Label icon = new Label("📋");
                 icon.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-min-width: 40; -fx-alignment: center;");
@@ -249,20 +254,41 @@ public class DashboardController {
                 }
 
                 taskRow.getChildren().addAll(icon, taskInfo, deadlineBox);
-                container.getChildren().add(taskRow);
+                tasksContainer.getChildren().add(taskRow);
             }
+
+            ScrollPane scrollPane = new ScrollPane(tasksContainer);
+            scrollPane.setStyle(
+                    "-fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent;");
+            scrollPane.setFitToWidth(true);
+            scrollPane.setPrefHeight(300);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            // Modern scrollbar styling with hover effects
+            scrollPane.setStyle(scrollPane.getStyle()
+                    + " -fx-vbar-policy: as-needed; -fx-hbar-policy: never; -fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent; -fx-scroll-bar: vertical { -fx-background-color: rgba(255,255,255,0.05); -fx-border-color: transparent; -fx-thumb-color: #2ecc71; -fx-thumb-radius: 10; -fx-thumb-border-radius: 10; -fx-thumb-border-color: transparent; -fx-thumb-background-radius: 10; -fx-track-color: transparent; -fx-thumb-hover-color: #27ae60; -fx-thumb-pressed-color: #229954; -fx-thumb-opacity: 0.8; -fx-thumb-hover-opacity: 1.0; }");
+            container.getChildren().add(scrollPane);
+
+            Label encouragementLabel = new Label("Let's get these tasks done! 💪");
+            encouragementLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #2ecc71; -fx-font-weight: bold;");
 
             Button closeBtn = new Button("Close");
             closeBtn.setStyle(
-                    "-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 30; -fx-background-radius: 5; -fx-cursor: hand;");
+                    "-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 10 30; -fx-background-radius: 5; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 1);");
             closeBtn.setOnAction(e -> dialog.close());
 
-            HBox btnBox = new HBox(closeBtn);
-            btnBox.setAlignment(Pos.CENTER_RIGHT);
+            HBox btnBox = new HBox(encouragementLabel);
+            btnBox.setAlignment(Pos.CENTER_LEFT);
+            btnBox.setSpacing(20);
             btnBox.setStyle("-fx-padding: 10 0 0 0;");
-            container.getChildren().add(btnBox);
 
-            Scene scene = new Scene(container, 600, Math.min(500, 200 + urgentTasks.size() * 90));
+            HBox closeBox = new HBox(closeBtn);
+            closeBox.setAlignment(Pos.CENTER_RIGHT);
+            closeBox.setStyle("-fx-padding: 10 0 0 0;");
+
+            container.getChildren().addAll(btnBox, closeBox);
+
+            Scene scene = new Scene(container, 600, 500);
             dialog.setScene(scene);
             dialog.showAndWait();
         }
