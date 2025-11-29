@@ -207,6 +207,34 @@
     transform: translateY(-2px);
 }
 
+.btn-glass-secondary {
+    -fx-background-color: linear-gradient(to right, #f38ba8, #d85c7a);
+    background: linear-gradient(to right, #f38ba8, #d85c7a);
+    -fx-text-fill: white;
+    color: white;
+    -fx-background-radius: 12;
+    border-radius: 12px;
+    -fx-font-weight: 600;
+    font-weight: 600;
+    -fx-font-size: 14px;
+    font-size: 14px;
+    -fx-cursor: hand;
+    cursor: pointer;
+    -fx-padding: 10 24;
+    padding: 10px 24px;
+    -fx-effect: dropshadow(three-pass-box, rgba(243, 139, 168, 0.4), 15, 0, 0, 5);
+    box-shadow: 0px 5px 15px 0px rgba(243, 139, 168, 0.4);
+}
+
+.btn-glass-secondary:hover {
+    -fx-background-color: linear-gradient(to right, #ff9fb8, #f38ba8);
+    background: linear-gradient(to right, #ff9fb8, #f38ba8);
+    -fx-effect: dropshadow(three-pass-box, rgba(243, 139, 168, 0.6), 20, 0, 0, 5);
+    box-shadow: 0px 5px 20px 0px rgba(243, 139, 168, 0.6);
+    -fx-translate-y: -2;
+    transform: translateY(-2px);
+}
+
 .auth-link {
     -fx-text-fill: #5e6ad2;
     color: #5e6ad2;
