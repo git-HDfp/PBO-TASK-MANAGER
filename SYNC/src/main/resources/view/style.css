@@ -926,8 +926,8 @@
 }
 
 .chart-legend-item {
-    -fx-text-fill: rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.3);
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
     -fx-padding: 2px 20px;
     padding: 2px 20px;
 }
@@ -1095,12 +1095,12 @@
 }
 
 .axis {
-    -fx-tick-label-fill: #a0a0b0;
+    -fx-tick-label-fill: #ffffff;
 }
 
 .axis-label {
-    -fx-text-fill: #a0a0b0;
-    color: #a0a0b0;
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
 }
 
 /* ==================== NEON BAR CHART DARK MODE ==================== */
@@ -1223,6 +1223,6 @@
 
 /* Transparent Chart Bar Colors - Matching Task Distribution Pie Chart */
 .transparent-chart .default-color0.chart-bar {
-    -fx-bar-fill: #b67171;
-    -fx-background-color: #b67171;
+    -fx-bar-fill: #7fb283;
+    -fx-background-color: #7fb283;
 }
