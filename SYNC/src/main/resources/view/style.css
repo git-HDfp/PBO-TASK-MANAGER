@@ -449,23 +449,23 @@
     cursor: pointer;
     -fx-padding: 4 8;
     padding: 4px 8px;
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-color: transparent;
+    border-color: transparent;
 }
 
 .card-high {
-    -fx-border-color: rgba(243, 139, 168, 0.3);
-    border-color: rgba(243, 139, 168, 0.3);
+    -fx-border-color: transparent;
+    border-color: transparent;
 }
 
 .card-medium {
-    -fx-border-color: rgba(250, 179, 135, 0.3);
-    border-color: rgba(250, 179, 135, 0.3);
+    -fx-border-color: transparent;
+    border-color: transparent;
 }
 
 .card-low {
-    -fx-border-color: rgba(166, 218, 149, 0.3);
-    border-color: rgba(166, 218, 149, 0.3);
+    -fx-border-color: transparent;
+    border-color: transparent;
 }
 
 .card-title-colorful {
@@ -498,34 +498,6 @@
     color: #ffffff;
     -fx-font-size: 18px;
     font-size: 18px;
-    -fx-font-weight: 600;
-    font-weight: 600;
-}
-
-/* ==================== CHART CARDS - ENHANCED ==================== */
-.chart-card {
-    -fx-background-color: linear-gradient(to bottom, #181B2E, #2A2F4E);
-    background: linear-gradient(to bottom, #181B2E, #2A2F4E);
-    -fx-background-radius: 20;
-    border-radius: 20px;
-    -fx-background-insets: 0;
-    -fx-border-radius: 20;
-    -fx-padding: 24;
-    padding: 24px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 14, 0, 0, 7);
-    box-shadow: 0px 7px 14px 0px rgba(0, 0, 0, 0.3);
-    -fx-border-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.05);
-    -fx-border-width: 1;
-    border-width: 1px;
-    border-style: solid;
-}
-
-.card-title {
-    -fx-text-fill: #ffffff;
-    color: #ffffff;
-    -fx-font-size: 16px;
-    font-size: 16px;
     -fx-font-weight: 600;
     font-weight: 600;
 }
@@ -649,24 +621,12 @@
 /* Grid Lines */
 .chart-vertical-grid-lines,
 .card-total {
-    -fx-border-color: rgba(137, 180, 250, 0.3);
-    border-color: rgba(137, 180, 250, 0.3);
+    -fx-border-color: transparent;
+    border-color: transparent;
 }
 
-.card-high {
-    -fx-border-color: rgba(243, 139, 168, 0.3);
-    border-color: rgba(243, 139, 168, 0.3);
-}
 
-.card-medium {
-    -fx-border-color: rgba(250, 179, 135, 0.3);
-    border-color: rgba(250, 179, 135, 0.3);
-}
 
-.card-low {
-    -fx-border-color: rgba(166, 218, 149, 0.3);
-    border-color: rgba(166, 218, 149, 0.3);
-}
 
 .card-title-colorful {
     -fx-text-fill: #a0a0b0;
@@ -702,33 +662,7 @@
     font-weight: 600;
 }
 
-/* ==================== CHART CARDS - ENHANCED ==================== */
-.chart-card {
-    -fx-background-color: linear-gradient(to bottom, #181B2E, #2A2F4E);
-    background: linear-gradient(to bottom, #181B2E, #2A2F4E);
-    -fx-background-radius: 20;
-    border-radius: 20px;
-    -fx-background-insets: 0;
-    -fx-border-radius: 20;
-    -fx-padding: 24;
-    padding: 24px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 14, 0, 0, 7);
-    box-shadow: 0px 7px 14px 0px rgba(0, 0, 0, 0.3);
-    -fx-border-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.05);
-    -fx-border-width: 1;
-    border-width: 1px;
-    border-style: solid;
-}
 
-.card-title {
-    -fx-text-fill: #ffffff;
-    color: #ffffff;
-    -fx-font-size: 16px;
-    font-size: 16px;
-    -fx-font-weight: 600;
-    font-weight: 600;
-}
 
 .chart-legend-item {
     -fx-text-fill: rgba(255, 255, 255, 0.65);
@@ -761,15 +695,7 @@
 /* Target the internal bars and pie slices */
 .bar-chart .chart-bar:hover,
 
-.card-medium {
-    -fx-border-color: rgba(250, 179, 135, 0.3);
-    border-color: rgba(250, 179, 135, 0.3);
-}
 
-.card-low {
-    -fx-border-color: rgba(166, 218, 149, 0.3);
-    border-color: rgba(166, 218, 149, 0.3);
-}
 
 .card-title-colorful {
     -fx-text-fill: #a0a0b0;
