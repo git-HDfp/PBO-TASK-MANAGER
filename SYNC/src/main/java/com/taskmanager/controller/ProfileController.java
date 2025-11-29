@@ -41,6 +41,12 @@ public class ProfileController {
     @FXML
     private Label sidebarTitle;
     @FXML
+    private Label sidebarSubtitle;
+    @FXML
+    private Label menuTitle;
+    @FXML
+    private Label accountTitle;
+    @FXML
     private Button toggleBtn;
     @FXML
     private Button btnDashboard;
@@ -149,6 +155,12 @@ public class ProfileController {
 
         if (sidebarTitle != null)
             sidebarTitle.setVisible(!isSidebarCollapsed);
+        if (sidebarSubtitle != null)
+            sidebarSubtitle.setVisible(!isSidebarCollapsed);
+        if (menuTitle != null)
+            menuTitle.setVisible(true);
+        if (accountTitle != null)
+            accountTitle.setVisible(true);
 
         ContentDisplay cd = isSidebarCollapsed ? ContentDisplay.GRAPHIC_ONLY : ContentDisplay.LEFT;
         if (btnDashboard != null)

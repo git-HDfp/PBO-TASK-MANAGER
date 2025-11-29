@@ -64,6 +64,8 @@ public class DashboardController {
     @FXML
     private Label sidebarTitle;
     @FXML
+    private Label sidebarSubtitle;
+    @FXML
     private Label menuTitle;
     @FXML
     private Label accountTitle;
@@ -309,10 +311,12 @@ public class DashboardController {
 
         if (sidebarTitle != null)
             sidebarTitle.setVisible(!isSidebarCollapsed);
+        if (sidebarSubtitle != null)
+            sidebarSubtitle.setVisible(!isSidebarCollapsed);
         if (menuTitle != null)
-            menuTitle.setVisible(!isSidebarCollapsed);
+            menuTitle.setVisible(true);
         if (accountTitle != null)
-            accountTitle.setVisible(!isSidebarCollapsed);
+            accountTitle.setVisible(true);
 
         ContentDisplay contentDisplay = isSidebarCollapsed ? ContentDisplay.GRAPHIC_ONLY : ContentDisplay.LEFT;
         if (btnDashboard != null)

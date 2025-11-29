@@ -49,6 +49,8 @@ public class TasksViewController {
     @FXML
     private Label sidebarTitle;
     @FXML
+    private Label sidebarSubtitle;
+    @FXML
     private Label menuTitle;
     @FXML
     private Label accountTitle;
@@ -199,12 +201,14 @@ public class TasksViewController {
 
         if (sidebarTitle != null)
             sidebarTitle.setVisible(!isSidebarCollapsed);
+        if (sidebarSubtitle != null)
+            sidebarSubtitle.setVisible(!isSidebarCollapsed);
         if (menuTitle != null)
-            menuTitle.setVisible(!isSidebarCollapsed);
+            menuTitle.setVisible(true);
         if (accountTitle != null)
-            accountTitle.setVisible(!isSidebarCollapsed);
+            accountTitle.setVisible(true);
         if (subjectsTitle != null)
-            subjectsTitle.setVisible(!isSidebarCollapsed);
+            subjectsTitle.setVisible(true);
 
         ContentDisplay cd = isSidebarCollapsed ? ContentDisplay.GRAPHIC_ONLY : ContentDisplay.LEFT;
         if (btnDashboard != null)
