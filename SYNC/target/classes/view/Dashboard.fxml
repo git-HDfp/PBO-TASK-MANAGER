@@ -77,16 +77,20 @@
                     <Label styleClass="subtitle" text="Real-time productivity metrics" />
                 </VBox>
                 <Region HBox.hgrow="ALWAYS" />
-                
+
+                <!-- Notification Message (positioned on the right) -->
+                <Label fx:id="notificationMessage" text="" visible="false"
+                       style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 10 15; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center; -fx-max-width: 400px;" />
+
                 <!-- Profile Section -->
                 <HBox alignment="CENTER_RIGHT" spacing="15">
                     <!-- Date Label -->
                     <Label fx:id="dateLabel" styleClass="date-label" text="Nov 28, 2025" />
-                    
+
                     <!-- Notification Button with Badge -->
                     <StackPane>
-                        <Button fx:id="btnNotification" onAction="#handleNotification" text="🔔" 
-                                styleClass="btn-icon" 
+                        <Button fx:id="btnNotification" onAction="#handleNotification" text="🔔"
+                                styleClass="btn-icon"
                                 style="-fx-font-size: 24px; -fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 8;" />
                         <Label fx:id="notificationBadge" text="0" visible="false"
                                style="-fx-background-color: #ff4444; -fx-text-fill: white; -fx-background-radius: 12px; -fx-padding: 3 7; -fx-font-size: 11px; -fx-font-weight: bold;"
@@ -94,7 +98,7 @@
                             <StackPane.margin><Insets top="5" right="5" /></StackPane.margin>
                         </Label>
                     </StackPane>
-                    
+
                     <!-- Profile Chip -->
                     <HBox styleClass="profile-chip" alignment="CENTER_LEFT" spacing="10" onMouseClicked="#handleGoToProfile">
                         <Label fx:id="avatarLabel" text="U" styleClass="profile-avatar"/>

@@ -83,6 +83,8 @@ public class DashboardController {
     private Button btnNotification;
     @FXML
     private Label notificationBadge;
+    @FXML
+    private Label notificationMessage;
 
     private boolean isSidebarCollapsed = false;
     private static final double SIDEBAR_EXPANDED_WIDTH = 260;
@@ -173,11 +175,17 @@ public class DashboardController {
         List<Task> urgentTasks = getUrgentTasks();
 
         if (urgentTasks.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Notifications");
-            alert.setHeaderText("No Urgent Tasks");
-            alert.setContentText("You have no tasks with deadlines in the next 24 hours!");
-            alert.showAndWait();
+            // Show cool notification message instead of popup
+            notificationMessage
+                    .setText("🎉 You're all caught up! No urgent tasks to worry about. Keep up the great work! 🌟");
+            notificationMessage.setVisible(true);
+
+            // Auto-hide after 5 seconds
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(5), notificationMessage);
+            fadeOut.setFromValue(1);
+            fadeOut.setToValue(0);
+            fadeOut.setOnFinished(e -> notificationMessage.setVisible(false));
+            fadeOut.play();
         } else {
             Stage dialog = new Stage();
             dialog.setTitle("Urgent Tasks");

@@ -21,6 +21,8 @@ import javafx.util.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Profile Controller
@@ -318,16 +320,17 @@ public class ProfileController {
 
         // Save to CSV
         if (CSVHelper.updateUser(currentUser)) {
-            showSuccess("Password changed successfully!", passwordSuccessLabel);
+            // Show success popup notification
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Password Changed");
+            alert.setHeaderText("Success!");
+            alert.setContentText("Your password has been changed successfully.");
+            alert.showAndWait();
 
-            // Clear password fields after a short delay to allow success message to show
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished(e -> {
-                currentPasswordField.clear();
-                newPasswordField.clear();
-                confirmPasswordField.clear();
-            });
-            delay.play();
+            // Clear password fields immediately
+            currentPasswordField.clear();
+            newPasswordField.clear();
+            confirmPasswordField.clear();
         } else {
             showError("Failed to change password", passwordErrorLabel);
         }
