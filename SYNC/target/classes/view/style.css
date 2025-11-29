@@ -37,6 +37,63 @@
     background-color: #13141f;
 }
 
+/* --- EDITOR CONTAINER --- */
+.editor-container {
+    -fx-background-color: linear-gradient(to bottom, #1e2032, #25273d);
+    background: linear-gradient(to bottom, #1e2032, #25273d);
+    -fx-background-radius: 25;
+    border-radius: 25px;
+    -fx-background-insets: 0;
+    -fx-border-radius: 25;
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-width: 1;
+    border-width: 1px;
+    border-style: solid;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 25, 0, 0, 12);
+    box-shadow: 0px 12px 25px 0px rgba(0, 0, 0, 0.4);
+    -fx-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.editor-container:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 30, 0, 0, 15);
+    box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 0.5);
+    -fx-translate-y: -2;
+    transform: translateY(-2px);
+}
+
+/* --- EDITOR ICONS AND SUBTITLES --- */
+.editor-icon {
+    -fx-text-fill: #5e6ad2;
+    color: #5e6ad2;
+    -fx-effect: dropshadow(gaussian, rgba(94, 106, 210, 0.6), 8, 0, 0, 0);
+    text-shadow: 0 0 8px rgba(94, 106, 210, 0.6);
+}
+
+.editor-title {
+    -fx-text-fill: #5e6ad2;
+    color: #5e6ad2;
+}
+
+.editor-subtitle {
+    -fx-text-fill: #5e6ad2;
+    color: #5e6ad2;
+    -fx-font-weight: 400;
+    font-weight: 400;
+}
+
+.form-icon {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+    -fx-font-size: 16px;
+    font-size: 16px;
+    -fx-min-width: 20;
+    min-width: 20px;
+    -fx-alignment: CENTER;
+    text-align: center;
+}
+
 /* --- TYPOGRAPHY - ENHANCED CONTRAST --- */
 .title-large {
     -fx-text-fill: #ffffff;
@@ -57,8 +114,18 @@
 }
 
 .form-label {
-    -fx-text-fill: #e0e0e0;
-    color: #e0e0e0;
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+}
+
+.form-label-dark {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+}
+
+.progress-label {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
 }
 
 /* --- PANELS & CONTAINERS --- */

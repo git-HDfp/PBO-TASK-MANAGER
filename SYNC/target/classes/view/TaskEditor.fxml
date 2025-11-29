@@ -12,64 +12,103 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox spacing="20" styleClass="editor-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taskmanager.controller.TaskEditorController">
+<VBox spacing="25" styleClass="editor-container" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.taskmanager.controller.TaskEditorController">
 
     <padding>
-        <Insets bottom="30" left="30" right="30" top="30" />
+        <Insets bottom="35" left="35" right="35" top="35" />
     </padding>
 
-    <Label fx:id="titleLabel" styleClass="editor-title" text="Task Details">
-        <font>
-            <Font name="System Bold" size="24" />
-        </font>
-    </Label>
+    <!-- Modern Header with Icon -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label styleClass="editor-icon" text="📝">
+            <font>
+                <Font size="32" />
+            </font>
+        </Label>
+        <VBox spacing="5">
+            <Label fx:id="titleLabel" styleClass="editor-title" text="Create New Task">
+                <font>
+                    <Font name="System Bold" size="26" />
+                </font>
+            </Label>
+            <Label styleClass="editor-subtitle" text="Fill in the details to add a new task to your list">
+                <font>
+                    <Font size="14" />
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
 
     <Label fx:id="errorLabel" managed="false" styleClass="error-label" visible="false" wrapText="true" />
 
-    <VBox spacing="15" VBox.vgrow="ALWAYS">
-        <VBox spacing="5">
-            <Label styleClass="form-label-dark" text="Task Title" />
+    <VBox spacing="18" VBox.vgrow="ALWAYS">
+        <VBox spacing="8">
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label styleClass="form-icon" text="📋" />
+                <Label styleClass="form-label-dark" text="Task Title" />
+            </HBox>
             <TextField fx:id="titleField" promptText="Enter task title" styleClass="glass-input-light" />
         </VBox>
 
-        <VBox spacing="5">
-            <Label styleClass="form-label-dark" text="Description" />
+        <VBox spacing="8">
+            <HBox alignment="CENTER_LEFT" spacing="8">
+                <Label styleClass="form-icon" text="📝" />
+                <Label styleClass="form-label-dark" text="Description" />
+            </HBox>
             <TextArea fx:id="descriptionArea" prefRowCount="3" promptText="Enter task description" styleClass="glass-textarea-light" wrapText="true" />
         </VBox>
 
         <!-- GANTI: Category menjadi Subject -->
-        <HBox spacing="15">
-            <VBox HBox.hgrow="ALWAYS" spacing="5">
-                <Label styleClass="form-label-dark" text="Subject" />
+        <HBox spacing="18">
+            <VBox HBox.hgrow="ALWAYS" spacing="8">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label styleClass="form-icon" text="📚" />
+                    <Label styleClass="form-label-dark" text="Subject" />
+                </HBox>
                 <ComboBox fx:id="subjectComboBox" maxWidth="Infinity" styleClass="combo-glass-light" />
             </VBox>
 
-            <VBox HBox.hgrow="ALWAYS" spacing="5">
-                <Label styleClass="form-label-dark" text="Priority" />
+            <VBox HBox.hgrow="ALWAYS" spacing="8">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label styleClass="form-icon" text="⚡" />
+                    <Label styleClass="form-label-dark" text="Priority" />
+                </HBox>
                 <ComboBox fx:id="priorityComboBox" maxWidth="Infinity" styleClass="combo-glass-light" />
             </VBox>
         </HBox>
 
-        <HBox spacing="15">
-            <VBox HBox.hgrow="ALWAYS" spacing="5">
-                <Label styleClass="form-label-dark" text="Status" />
+        <HBox spacing="18">
+            <VBox HBox.hgrow="ALWAYS" spacing="8">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label styleClass="form-icon" text="🔄" />
+                    <Label styleClass="form-label-dark" text="Status" />
+                </HBox>
                 <ComboBox fx:id="statusComboBox" maxWidth="Infinity" styleClass="combo-glass-light" />
             </VBox>
 
-            <VBox HBox.hgrow="ALWAYS" spacing="5">
-                <Label styleClass="form-label-dark" text="Deadline Date" />
+            <VBox HBox.hgrow="ALWAYS" spacing="8">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label styleClass="form-icon" text="📅" />
+                    <Label styleClass="form-label-dark" text="Deadline Date" />
+                </HBox>
                 <DatePicker fx:id="deadlinePicker" maxWidth="Infinity" promptText="Pick Date" styleClass="glass-input-light" />
             </VBox>
 
-            <VBox prefWidth="100" spacing="5">
-                <Label styleClass="form-label-dark" text="Time (HH:mm)" />
+            <VBox prefWidth="120" spacing="8">
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label styleClass="form-icon" text="⏰" />
+                    <Label styleClass="form-label-dark" text="Time (HH:mm)" />
+                </HBox>
                 <TextField fx:id="timeField" alignment="CENTER" promptText="23:59" styleClass="glass-input-light" text="23:59" />
             </VBox>
         </HBox>
 
-        <VBox spacing="5">
+        <VBox spacing="8">
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label styleClass="form-label-dark" text="Progress" />
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label styleClass="form-icon" text="📊" />
+                    <Label styleClass="form-label-dark" text="Progress" />
+                </HBox>
                 <Label fx:id="progressLabel" styleClass="progress-label" text="0%">
                     <font>
                         <Font name="System Bold" size="13" />
