@@ -123,8 +123,19 @@ public class TasksViewController {
             subjectBtn.setMaxWidth(Double.MAX_VALUE);
             subjectBtn.getStyleClass().add("nav-btn");
 
+            // Highlight if this subject is currently selected
+            if (subject.equals(currentFilterSubject)) {
+                subjectBtn.getStyleClass().add("nav-btn-active");
+            }
+
             subjectBtn.setOnAction(e -> {
-                currentFilterSubject = subject;
+                // If clicking the same subject, go back to My Tasks (show all)
+                if (subject.equals(currentFilterSubject)) {
+                    currentFilterSubject = null;
+                } else {
+                    currentFilterSubject = subject;
+                }
+                populateSubjects(); // Repopulate to update visual state
                 refresh();
             });
 

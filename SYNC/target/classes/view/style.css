@@ -181,6 +181,53 @@
     border-style: solid;
 }
 
+.subject-scroll {
+    -fx-background-color: #1e2032;
+    background-color: #1e2032;
+}
+
+.subject-scroll .viewport {
+    -fx-background-color: #1e2032;
+    background-color: #1e2032;
+}
+
+/* Modern Scroll Bar Styling */
+.subject-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-max-width: 8px;
+}
+
+.subject-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.subject-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-border-color: transparent;
+}
+
+.subject-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.subject-scroll .scroll-bar:vertical .increment-button,
+.subject-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.subject-scroll .scroll-bar:vertical .increment-arrow,
+.subject-scroll .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
 .sidebar-section-heading {
     -fx-text-fill: #6c6f93;
     color: #6c6f93;
@@ -197,8 +244,8 @@
     color: #ffffff;
     -fx-alignment: CENTER_LEFT;
     text-align: left;
-    -fx-font-size: 16px;
-    font-size: 16px;
+    -fx-font-size: 14px;
+    font-size: 14px;
     -fx-font-weight: 500;
     font-weight: 500;
     -fx-cursor: hand;
