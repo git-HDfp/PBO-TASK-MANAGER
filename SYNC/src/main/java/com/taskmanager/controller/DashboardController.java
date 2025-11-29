@@ -196,7 +196,7 @@ public class DashboardController {
                 taskRow.setStyle("-fx-background-color: #25274d; -fx-padding: 15; -fx-background-radius: 8;");
 
                 Label icon = new Label("📋");
-                icon.setStyle("-fx-font-size: 24px; -fx-min-width: 40; -fx-alignment: center;");
+                icon.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-min-width: 40; -fx-alignment: center;");
 
                 VBox taskInfo = new VBox(5);
                 HBox.setHgrow(taskInfo, Priority.ALWAYS);

@@ -114,14 +114,17 @@
                     <VBox styleClass="card-high" HBox.hgrow="ALWAYS">
                         <Label text="🔥 HIGH PRIORITY" styleClass="card-title-colorful"/>
                         <Label fx:id="highPriorityLabel" text="0" styleClass="card-value-colorful"/>
+                        <Label text="Urgent tasks requiring immediate attention" styleClass="card-subtitle-colorful"/>
                     </VBox>
                     <VBox styleClass="card-medium" HBox.hgrow="ALWAYS">
                         <Label text="⚡ MEDIUM PRIORITY" styleClass="card-title-colorful"/>
                         <Label fx:id="mediumPriorityLabel" text="0" styleClass="card-value-colorful"/>
+                        <Label text="Tasks with moderate importance and timeline" styleClass="card-subtitle-colorful"/>
                     </VBox>
                     <VBox styleClass="card-low" HBox.hgrow="ALWAYS">
                         <Label text="✨ LOW PRIORITY" styleClass="card-title-colorful"/>
                         <Label fx:id="lowPriorityLabel" text="0" styleClass="card-value-colorful"/>
+                        <Label text="Low-priority tasks for future completion" styleClass="card-subtitle-colorful"/>
                     </VBox>
                 </HBox>
             </VBox>
