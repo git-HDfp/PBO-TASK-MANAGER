@@ -366,6 +366,43 @@
     background-color: transparent;
 }
 
+/* Modern Scroll Bar Styling for Task Columns */
+.column-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-max-width: 8px;
+}
+
+.column-scroll .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.column-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-border-color: transparent;
+}
+
+.column-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.column-scroll .scroll-bar:vertical .increment-button,
+.column-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.column-scroll .scroll-bar:vertical .increment-arrow,
+.column-scroll .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
 /* ==================== TASK CARDS ==================== */
 .task-card {
     -fx-background-color: #27293d;
