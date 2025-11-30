@@ -2260,3 +2260,67 @@
     -fx-text-fill: #ffffff;
     color: #ffffff;
 }
+
+/* ==================== GLASS INPUT LIGHT ==================== */
+.glass-input-light {
+    -fx-background-color: #27293d;
+    background-color: #27293d;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 1;
+    border-width: 1px;
+    border-style: solid;
+    -fx-background-radius: 12;
+    border-radius: 12px;
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+    -fx-padding: 12 16;
+    padding: 12px 16px;
+    -fx-font-size: 14px;
+    font-size: 14px;
+    -fx-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.glass-input-light:focused {
+    -fx-background-color: #2e3145;
+    background-color: #2e3145;
+    -fx-border-color: #5e6ad2;
+    border-color: #5e6ad2;
+    -fx-border-width: 2;
+    border-width: 2px;
+    -fx-effect: dropshadow(three-pass-box, rgba(94, 106, 210, 0.5), 15, 0, 0, 5);
+    box-shadow: 0px 5px 15px 0px rgba(94, 106, 210, 0.5);
+}
+
+/* Error Input State */
+.error-input {
+    -fx-border-color: #f38ba8 !important;
+    border-color: #f38ba8 !important;
+    -fx-border-width: 2 !important;
+    color: #ffffff;
+    -fx-background-radius: 12;
+    border-radius: 12px;
+    -fx-font-weight: 600;
+    font-weight: 600;
+    -fx-font-size: 14px;
+    font-size: 14px;
+    -fx-cursor: hand;
+    cursor: pointer;
+    -fx-padding: 10 24;
+    padding: 10px 24px;
+    -fx-border-color: transparent;
+    border-color: transparent;
+    -fx-border-width: 0;
+    border-width: 0px;
+    border-style: solid;
+}
+
+.btn-glass-gray:hover {
+    -fx-background-color: rgba(108, 111, 147, 0.35);
+    background-color: rgba(108, 111, 147, 0.35);
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.15), 12, 0, 0, 3);
+    box-shadow: 0px 3px 12px 0px rgba(255, 255, 255, 0.15);
+    -fx-translate-y: -1;
+    transform: translateY(-1px);
+}

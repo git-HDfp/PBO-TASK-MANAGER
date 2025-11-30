@@ -5,10 +5,13 @@ import com.taskmanager.utils.SubjectHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.util.Optional;
+import javafx.stage.StageStyle;
 
 public class SubjectViewController {
 
@@ -71,25 +74,56 @@ public class SubjectViewController {
     @FXML
     private void handleEdit() {
         String selectedSubject = subjectListView.getSelectionModel().getSelectedItem();
-        if (selectedSubject == null)
-            return;
-
-        // For now, use the text field value as the new name
-        String newName = subjectField.getText().trim();
-        if (newName.isEmpty()) {
-            showAlert("Error", "Subject name cannot be empty.");
+        if (selectedSubject == null) {
+            showAlert("Error", "Please select a subject to edit.");
             return;
         }
 
-        if (newName.equals(selectedSubject))
-            return;
+        try {
+            // Load the custom dialog
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditSubjectDialog.fxml"));
+            Parent root = loader.load();
 
-        if (SubjectHelper.updateSubject(selectedSubject, newName)) {
-            loadSubjects();
-            subjectField.clear();
-            showAlert("Success", "Subject updated successfully.");
-        } else {
-            showAlert("Error", "Failed to update subject.");
+            // Get the controller and set the subject name
+            EditSubjectDialogController dialogController = loader.getController();
+            dialogController.setSubjectName(selectedSubject);
+
+            // Create and configure the stage
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Subject");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(btnEdit.getScene().getWindow());
+
+            // Create scene with the loaded FXML
+            Scene scene = new Scene(root);
+            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
+
+            dialogStage.setScene(scene);
+            dialogStage.initStyle(StageStyle.TRANSPARENT);
+
+            // Show and wait for the dialog to close
+            dialogStage.showAndWait();
+
+            // Process the result
+            if (dialogController.isSaved()) {
+                String newName = dialogController.getNewSubjectName();
+
+                if (newName.equals(selectedSubject)) {
+                    return;
+                }
+
+                if (SubjectHelper.updateSubject(selectedSubject, newName)) {
+                    loadSubjects();
+                    subjectField.clear();
+                    showAlert("Success", "Subject updated successfully.");
+                } else {
+                    showAlert("Error", "Failed to update subject. Subject name may already exist.");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to open edit dialog: " + e.getMessage());
         }
     }
 

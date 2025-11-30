@@ -1,0 +1,17 @@
+com\taskmanager\controller\TasksViewController.class
+module-info.class
+com\taskmanager\controller\LoginController.class
+com\taskmanager\controller\ProfileController.class
+com\taskmanager\Main.class
+com\taskmanager\component\CustomAlertDialog.class
+com\taskmanager\controller\RegisterController.class
+com\taskmanager\model\Task.class
+com\taskmanager\component\TaskCard.class
+com\taskmanager\utils\CSVHelper.class
+com\taskmanager\controller\EditSubjectDialogController.class
+com\taskmanager\controller\SubjectViewController.class
+com\taskmanager\utils\SubjectHelper.class
+com\taskmanager\component\CustomAlertDialog$AlertType.class
+com\taskmanager\controller\DashboardController.class
+com\taskmanager\model\User.class
+com\taskmanager\controller\TaskEditorController.class

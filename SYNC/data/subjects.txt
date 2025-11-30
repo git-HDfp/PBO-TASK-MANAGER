@@ -4,6 +4,6 @@ Pemrograman Berorientasi Objek
 Pendidikan Kewarganegaraan
 Metode Numerik
 Matematika Diskrit
-SISOP
+Sistem Operasi
 Konsep Pemrograman
 Sistem Digital
