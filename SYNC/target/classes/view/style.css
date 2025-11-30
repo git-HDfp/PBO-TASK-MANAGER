@@ -1345,6 +1345,7 @@
     -fx-bar-fill: #7fb283;
     -fx-background-color: #7fb283;
 }
+
 /* Urgent Tasks Scroll Bar */
 .urgent-scroll {
     -fx-background-color: transparent;
@@ -1391,3 +1392,855 @@
     -fx-background-color: transparent;
 }
 
+
+/* --- LIST VIEW --- */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 15;
+    -fx-font-size: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:selected,
+.list-cell:filled:selected:hover {
+    -fx-background-color: rgba(94, 106, 210, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #5e6ad2;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-cursor: hand;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* --- NEUTRAL BUTTON --- */
+.btn-glass-gray {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+}
+
+/* Theme-Matching Neon Title */
+.card-title-neon {
+    -fx-text-fill: #89b4fa;
+    color: #89b4fa;
+    -fx-font-size: 18px;
+    font-size: 18px;
+    -fx-font-weight: 700;
+    font-weight: 700;
+    -fx-effect: dropshadow(gaussian, rgba(137, 180, 250, 0.8), 10, 0, 0, 0);
+    text-shadow: 0 0 10px rgba(137, 180, 250, 0.8);
+}
+
+/* Theme-Matching Neon Bar Chart Background */
+.neon-bar-chart {
+    -fx-background-color: transparent;
+    background-color: transparent;
+}
+
+.neon-bar-chart .chart-plot-background {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Theme-Matching Neon Axis Styling */
+.neon-axis .axis-label {
+    -fx-text-fill: #89b4fa;
+    color: #89b4fa;
+    -fx-font-weight: 600;
+    font-weight: 600;
+}
+
+.neon-axis .axis-tick-mark {
+    -fx-stroke: #89b4fa;
+    stroke: #89b4fa;
+}
+
+.neon-axis .axis {
+    -fx-tick-label-fill: #89b4fa;
+    -fx-font-size: 11px;
+    font-size: 11px;
+}
+
+/* Theme-Matching Neon Grid Lines */
+.neon-bar-chart .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(137, 180, 250, 0.3);
+    stroke: rgba(137, 180, 250, 0.3);
+}
+
+.neon-bar-chart .chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+    stroke: transparent;
+}
+
+/* Theme-Matching Bar Colors - Blue, Orange, Green, Pink */
+.neon-bar-chart .default-color0.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #89b4fa, #5e6ad2);
+    -fx-background-color: linear-gradient(to top, #89b4fa, #5e6ad2);
+    background-color: #5e6ad2;
+    -fx-effect: dropshadow(gaussian, rgba(137, 180, 250, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color1.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #fab387, #e9904d);
+    -fx-background-color: linear-gradient(to top, #fab387, #e9904d);
+    background-color: #e9904d;
+    -fx-effect: dropshadow(gaussian, rgba(250, 179, 135, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color2.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #a6e3a1, #7ec97f);
+    -fx-background-color: linear-gradient(to top, #a6e3a1, #7ec97f);
+    background-color: #7ec97f;
+    -fx-effect: dropshadow(gaussian, rgba(166, 227, 161, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color3.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #f38ba8, #d85c7a);
+    -fx-background-color: linear-gradient(to top, #f38ba8, #d85c7a);
+    background-color: #d85c7a;
+    -fx-effect: dropshadow(gaussian, rgba(243, 139, 168, 0.6), 15, 0.7, 0, 0);
+}
+
+/* Bars Hover Effect */
+.neon-bar-chart .chart-bar:hover {
+    -fx-opacity: 0.8;
+    opacity: 0.8;
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+/* ==================== TRANSPARENT CHART ==================== */
+.transparent-chart {
+    -fx-background-color: transparent;
+}
+
+.transparent-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* Transparent Chart Bar Colors - Matching Task Distribution Pie Chart */
+.transparent-chart .default-color0.chart-bar {
+    -fx-bar-fill: #7fb283;
+    -fx-background-color: #7fb283;
+}
+
+/* Urgent Tasks Scroll Bar */
+.urgent-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.urgent-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.urgent-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-max-width: 8px;
+}
+
+.urgent-scroll .scroll-bar:vertical .track {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px;
+}
+
+.urgent-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #2ecc71;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.urgent-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #27ae60;
+}
+
+.urgent-scroll .scroll-bar:vertical .increment-button,
+.urgent-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.urgent-scroll .scroll-bar:vertical .increment-arrow,
+.urgent-scroll .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+
+/* --- LIST VIEW --- */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 15;
+    -fx-font-size: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:selected,
+.list-cell:filled:selected:hover {
+    -fx-background-color: rgba(94, 106, 210, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #5e6ad2;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-cursor: hand;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+
+/* --- SUBJECT LIST VIEW SCROLLBAR --- */
+.subject-list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.subject-list-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-max-width: 8px;
+}
+
+.subject-list-view .scroll-bar:vertical .track {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px;
+}
+
+.subject-list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #5e6ad2;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.subject-list-view .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #6e7be3;
+}
+
+.subject-list-view .scroll-bar:vertical .increment-button,
+.subject-list-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.subject-list-view .scroll-bar:vertical .increment-arrow,
+.subject-list-view .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+/* --- NEUTRAL BUTTON --- */
+
+.btn-glass-gray {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+}
+
+.neon-bar-chart .chart-plot-background {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Theme-Matching Neon Axis Styling */
+.neon-axis .axis-label {
+    -fx-text-fill: #89b4fa;
+    color: #89b4fa;
+    -fx-font-weight: 600;
+    font-weight: 600;
+}
+
+.neon-axis .axis-tick-mark {
+    -fx-stroke: #89b4fa;
+    stroke: #89b4fa;
+}
+
+.neon-axis .axis {
+    -fx-tick-label-fill: #89b4fa;
+    -fx-font-size: 11px;
+    font-size: 11px;
+}
+
+/* Theme-Matching Neon Grid Lines */
+.neon-bar-chart .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(137, 180, 250, 0.3);
+    stroke: rgba(137, 180, 250, 0.3);
+}
+
+.neon-bar-chart .chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+    stroke: transparent;
+}
+
+/* Theme-Matching Bar Colors - Blue, Orange, Green, Pink */
+.neon-bar-chart .default-color0.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #89b4fa, #5e6ad2);
+    -fx-background-color: linear-gradient(to top, #89b4fa, #5e6ad2);
+    background-color: #5e6ad2;
+    -fx-effect: dropshadow(gaussian, rgba(137, 180, 250, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color1.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #fab387, #e9904d);
+    -fx-background-color: linear-gradient(to top, #fab387, #e9904d);
+    background-color: #e9904d;
+    -fx-effect: dropshadow(gaussian, rgba(250, 179, 135, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color2.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #a6e3a1, #7ec97f);
+    -fx-background-color: linear-gradient(to top, #a6e3a1, #7ec97f);
+    background-color: #7ec97f;
+    -fx-effect: dropshadow(gaussian, rgba(166, 227, 161, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color3.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #f38ba8, #d85c7a);
+    -fx-background-color: linear-gradient(to top, #f38ba8, #d85c7a);
+    background-color: #d85c7a;
+    -fx-effect: dropshadow(gaussian, rgba(243, 139, 168, 0.6), 15, 0.7, 0, 0);
+}
+
+/* Bars Hover Effect */
+.neon-bar-chart .chart-bar:hover {
+    -fx-opacity: 0.8;
+    opacity: 0.8;
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+/* ==================== TRANSPARENT CHART ==================== */
+.transparent-chart {
+    -fx-background-color: transparent;
+}
+
+.transparent-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* Transparent Chart Bar Colors - Matching Task Distribution Pie Chart */
+.transparent-chart .default-color0.chart-bar {
+    -fx-bar-fill: #7fb283;
+    -fx-background-color: #7fb283;
+}
+
+/* Urgent Tasks Scroll Bar */
+.urgent-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.urgent-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.urgent-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-max-width: 8px;
+}
+
+.urgent-scroll .scroll-bar:vertical .track {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px;
+}
+
+.urgent-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #2ecc71;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.urgent-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #27ae60;
+}
+
+.urgent-scroll .scroll-bar:vertical .increment-button,
+.urgent-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.urgent-scroll .scroll-bar:vertical .increment-arrow,
+.urgent-scroll .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+
+/* --- LIST VIEW --- */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 15;
+    -fx-font-size: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:selected,
+.list-cell:filled:selected:hover {
+    -fx-background-color: rgba(94, 106, 210, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #5e6ad2;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-cursor: hand;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* --- NEUTRAL BUTTON --- */
+.btn-glass-gray {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 24;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
+}
+
+.btn-glass-gray:hover {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+/* --- NEUTRAL BUTTON --- */
+
+.btn-glass-gray {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+}
+
+.neon-bar-chart .chart-plot-background {
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Theme-Matching Neon Axis Styling */
+.neon-axis .axis-label {
+    -fx-text-fill: #89b4fa;
+    color: #89b4fa;
+    -fx-font-weight: 600;
+    font-weight: 600;
+}
+
+.neon-axis .axis-tick-mark {
+    -fx-stroke: #89b4fa;
+    stroke: #89b4fa;
+}
+
+.neon-axis .axis {
+    -fx-tick-label-fill: #89b4fa;
+    -fx-font-size: 11px;
+    font-size: 11px;
+}
+
+/* Theme-Matching Neon Grid Lines */
+.neon-bar-chart .chart-horizontal-grid-lines {
+    -fx-stroke: rgba(137, 180, 250, 0.3);
+    stroke: rgba(137, 180, 250, 0.3);
+}
+
+.neon-bar-chart .chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+    stroke: transparent;
+}
+
+/* Theme-Matching Bar Colors - Blue, Orange, Green, Pink */
+.neon-bar-chart .default-color0.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #89b4fa, #5e6ad2);
+    -fx-background-color: linear-gradient(to top, #89b4fa, #5e6ad2);
+    background-color: #5e6ad2;
+    -fx-effect: dropshadow(gaussian, rgba(137, 180, 250, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color1.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #fab387, #e9904d);
+    -fx-background-color: linear-gradient(to top, #fab387, #e9904d);
+    background-color: #e9904d;
+    -fx-effect: dropshadow(gaussian, rgba(250, 179, 135, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color2.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #a6e3a1, #7ec97f);
+    -fx-background-color: linear-gradient(to top, #a6e3a1, #7ec97f);
+    background-color: #7ec97f;
+    -fx-effect: dropshadow(gaussian, rgba(166, 227, 161, 0.6), 15, 0.7, 0, 0);
+}
+
+.neon-bar-chart .default-color3.chart-bar {
+    -fx-bar-fill: linear-gradient(to top, #f38ba8, #d85c7a);
+    -fx-background-color: linear-gradient(to top, #f38ba8, #d85c7a);
+    background-color: #d85c7a;
+    -fx-effect: dropshadow(gaussian, rgba(243, 139, 168, 0.6), 15, 0.7, 0, 0);
+}
+
+/* Bars Hover Effect */
+.neon-bar-chart .chart-bar:hover {
+    -fx-opacity: 0.8;
+    opacity: 0.8;
+    -fx-cursor: hand;
+    cursor: hand;
+}
+
+/* ==================== TRANSPARENT CHART ==================== */
+.transparent-chart {
+    -fx-background-color: transparent;
+}
+
+.transparent-chart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+/* Transparent Chart Bar Colors - Matching Task Distribution Pie Chart */
+.transparent-chart .default-color0.chart-bar {
+    -fx-bar-fill: #7fb283;
+    -fx-background-color: #7fb283;
+}
+
+/* Urgent Tasks Scroll Bar */
+.urgent-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.urgent-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.urgent-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+    -fx-max-width: 8px;
+}
+
+.urgent-scroll .scroll-bar:vertical .track {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px;
+}
+
+.urgent-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #2ecc71;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.urgent-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #27ae60;
+}
+
+.urgent-scroll .scroll-bar:vertical .increment-button,
+.urgent-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-shape: "";
+}
+
+.urgent-scroll .scroll-bar:vertical .increment-arrow,
+.urgent-scroll .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-background-color: transparent;
+}
+
+
+/* --- LIST VIEW --- */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 5;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 15;
+    -fx-font-size: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:selected,
+.list-cell:filled:selected:hover {
+    -fx-background-color: rgba(94, 106, 210, 0.2);
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #5e6ad2;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-cursor: hand;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* --- NEUTRAL BUTTON --- */
+.btn-glass-gray {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 10 24;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
+}
+
+.btn-glass-gray:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-translate-y: -2;
+}
+
+
+/* --- MISSING LIGHT CLASSES (Mapped to Dark for Consistency) --- */
+.glass-input-light {
+    -fx-background-color: #27293d;
+    -fx-border-color: transparent;
+    -fx-background-radius: 12;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 16;
+    -fx-font-size: 14px;
+}
+
+.glass-input-light:focused {
+    -fx-background-color: #2e3145;
+    -fx-border-color: #5e6ad2;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(94, 106, 210, 0.4), 15, 0, 0, 5);
+}
+
+/* Specific DatePicker Styling */
+.date-picker.glass-input-light {
+    -fx-background-color: #27293d;
+    -fx-background-radius: 12;
+    -fx-padding: 0;
+}
+
+.date-picker.glass-input-light .text-field {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12 16;
+    -fx-font-size: 14px;
+}
+
+.date-picker.glass-input-light .arrow-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-padding: 0 15 0 0;
+}
+
+.date-picker.glass-input-light .arrow-button .arrow {
+    -fx-background-color: #ffffff;
+}
+
+/* DatePicker Popup (Calendar) */
+.date-picker-popup {
+    -fx-background-color: #1e2032;
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 20, 0, 0, 10);
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #1e2032;
+}
+
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup .week-number-cell {
+    -fx-text-fill: #6c6f93;
+}
+
+.date-picker-popup .day-cell {
+    -fx-background-color: #1e2032;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: transparent;
+}
+
+.date-picker-popup .day-cell:hover,
+.date-picker-popup .selected {
+    -fx-background-color: #5e6ad2;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 5;
+}
+
+.date-picker-popup .day-name-cell {
+    -fx-text-fill: #a0a0b0;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+    -fx-background-color: #ffffff;
+}
+
+/* TextArea Styling */
+.glass-textarea-light {
+    -fx-background-color: #27293d;
+    -fx-border-color: transparent;
+    -fx-background-radius: 12;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+.glass-textarea-light .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.glass-textarea-light .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.glass-textarea-light .content {
+    -fx-background-color: #27293d;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 12;
+    -fx-padding: 8;
+}
+
+.glass-textarea-light:focused {
+    -fx-background-color: #2e3145;
+    -fx-border-color: #5e6ad2;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(94, 106, 210, 0.4), 15, 0, 0, 5);
+}
+
+.glass-textarea-light:focused .content {
+    -fx-background-color: #2e3145;
+}
+
+/* ComboBox Styling */
+.combo-glass-light {
+    -fx-background-color: #27293d;
+    -fx-border-color: transparent;
+    -fx-background-radius: 12;
+    -fx-padding: 4 10;
+}
+
+.combo-glass-light .list-cell {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+}
+
+.combo-glass-light:showing {
+    -fx-background-color: #2e3145;
+}
+
+.combo-glass-light .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-glass-light .arrow {
+    -fx-background-color: #ffffff;
+}
+
+/* ComboBox Popup List */
+.combo-glass-light .list-view {
+    -fx-background-color: #1e2032;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 5);
+    -fx-background-radius: 12;
+    -fx-padding: 5;
+}
+
+.combo-glass-light .list-view .list-cell {
+    -fx-text-fill: white;
+    -fx-padding: 8 12;
+    -fx-background-color: transparent;
+}
+
+.combo-glass-light .list-view .list-cell:hover {
+    -fx-background-color: rgba(94, 106, 210, 0.2);
+    -fx-background-radius: 6;
+}
+
+.combo-glass-light .list-view .list-cell:filled:selected {
+    -fx-background-color: #5e6ad2;
+    -fx-background-radius: 6;
+}
+
+/* Slider Styling */
+.slider-glass .track {
+    -fx-background-color: #3f4259;
+    -fx-pref-height: 6px;
+    -fx-background-radius: 3px;
+}
+
+.slider-glass .thumb {
+    -fx-background-color: #5e6ad2;
+    -fx-effect: dropshadow(three-pass-box, rgba(94, 106, 210, 0.4), 10, 0, 0, 0);
+    -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-background-radius: 50%;
+}
+
+.slider-glass:focused .thumb {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 10, 0, 0, 0);
+}

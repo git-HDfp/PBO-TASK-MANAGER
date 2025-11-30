@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.TransferMode;
@@ -35,7 +34,6 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 public class TasksViewController {
     @FXML
@@ -160,10 +158,11 @@ public class TasksViewController {
             Parent root = loader.load();
 
             Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED); // Clean look
+            stage.initStyle(StageStyle.TRANSPARENT); // Clean look
             stage.initModality(Modality.APPLICATION_MODAL);
             Scene scene = new Scene(root);
-            // scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
+            scene.setFill(Color.TRANSPARENT);
+            scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
             stage.setScene(scene);
 
             // Refresh subjects when dialog closes
@@ -451,10 +450,4 @@ public class TasksViewController {
         }
     }
 
-    private void applyModernScrollbarStyling(ScrollPane scrollPane) {
-        if (scrollPane != null) {
-            scrollPane.setStyle(scrollPane.getStyle()
-                    + " -fx-vbar-policy: as-needed; -fx-hbar-policy: never; -fx-background: transparent; -fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent; -fx-scroll-bar: vertical { -fx-background-color: rgba(255,255,255,0.05); -fx-border-color: transparent; -fx-thumb-color: #2ecc71; -fx-thumb-radius: 10; -fx-thumb-border-radius: 10; -fx-thumb-border-color: transparent; -fx-thumb-background-radius: 10; -fx-track-color: transparent; -fx-thumb-hover-color: #27ae60; -fx-thumb-pressed-color: #229954; -fx-thumb-opacity: 0.8; -fx-thumb-hover-opacity: 1.0; }");
-        }
-    }
 }
