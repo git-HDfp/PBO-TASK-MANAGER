@@ -79,8 +79,10 @@
                 <Region HBox.hgrow="ALWAYS" />
 
                 <!-- Notification Message (positioned on the right) -->
-                <Label fx:id="notificationMessage" text="" visible="false"
-                       style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 10 15; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center; -fx-max-width: 400px;" />
+                <Label fx:id="notificationMessage" text="" visible="false" wrapText="true"
+                       style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 10 15; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center; -fx-max-width: 600px;">
+                    <HBox.margin><Insets left="30"/></HBox.margin>
+                </Label>
 
                 <!-- Profile Section -->
                 <HBox alignment="CENTER_RIGHT" spacing="15">

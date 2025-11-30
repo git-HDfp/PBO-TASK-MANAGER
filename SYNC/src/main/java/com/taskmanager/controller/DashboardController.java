@@ -177,7 +177,7 @@ public class DashboardController {
         if (urgentTasks.isEmpty()) {
             // Show cool notification message instead of popup
             notificationMessage
-                    .setText("🎉 You're all caught up! No urgent tasks to worry about. Keep up the great work! 🌟");
+                    .setText("🎉 You're all caught up! No urgent tasks to worry about.");
             notificationMessage.setVisible(true);
 
             // Auto-hide after 5 seconds
