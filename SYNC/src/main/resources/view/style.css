@@ -2244,3 +2244,19 @@
     -fx-background-color: #ffffff;
     -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 10, 0, 0, 0);
 }
+
+/* ==================== CUSTOM ALERT DIALOG ==================== */
+.alert-icon {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+}
+
+.alert-title {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+}
+
+.alert-message {
+    -fx-text-fill: #ffffff;
+    color: #ffffff;
+}

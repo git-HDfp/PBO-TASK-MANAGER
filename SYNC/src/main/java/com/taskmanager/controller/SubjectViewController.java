@@ -1,5 +1,6 @@
 package com.taskmanager.controller;
 
+import com.taskmanager.component.CustomAlertDialog;
 import com.taskmanager.utils.SubjectHelper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,29 +74,23 @@ public class SubjectViewController {
         if (selectedSubject == null)
             return;
 
-        TextInputDialog dialog = new TextInputDialog(selectedSubject);
-        dialog.setTitle("Edit Subject");
-        dialog.setHeaderText("Edit subject name:");
-        dialog.setContentText("Name:");
+        // For now, use the text field value as the new name
+        String newName = subjectField.getText().trim();
+        if (newName.isEmpty()) {
+            showAlert("Error", "Subject name cannot be empty.");
+            return;
+        }
 
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(newName -> {
-            if (newName.trim().isEmpty()) {
-                showAlert("Error", "Subject name cannot be empty.");
-                return;
-            }
+        if (newName.equals(selectedSubject))
+            return;
 
-            if (newName.equals(selectedSubject))
-                return;
-
-            if (SubjectHelper.updateSubject(selectedSubject, newName)) {
-                loadSubjects();
-                subjectField.clear();
-                showAlert("Success", "Subject updated successfully.");
-            } else {
-                showAlert("Error", "Failed to update subject.");
-            }
-        });
+        if (SubjectHelper.updateSubject(selectedSubject, newName)) {
+            loadSubjects();
+            subjectField.clear();
+            showAlert("Success", "Subject updated successfully.");
+        } else {
+            showAlert("Error", "Failed to update subject.");
+        }
     }
 
     @FXML
@@ -104,13 +99,10 @@ public class SubjectViewController {
         if (selectedSubject == null)
             return;
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Subject");
-        alert.setHeaderText("Are you sure you want to delete '" + selectedSubject + "'?");
-        alert.setContentText("This action cannot be undone.");
+        boolean confirmed = CustomAlertDialog.showConfirmation("Delete Subject",
+                "Are you sure you want to delete '" + selectedSubject + "'?\nThis action cannot be undone.");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (confirmed) {
             if (SubjectHelper.deleteSubject(selectedSubject)) {
                 loadSubjects();
                 subjectField.clear();
@@ -128,10 +120,10 @@ public class SubjectViewController {
     }
 
     private void showAlert(String title, String content) {
-        Alert alert = new Alert(title.equals("Error") ? Alert.AlertType.ERROR : Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+        if (title.equals("Error")) {
+            CustomAlertDialog.showError(title, content);
+        } else {
+            CustomAlertDialog.showSuccess(title, content);
+        }
     }
 }
