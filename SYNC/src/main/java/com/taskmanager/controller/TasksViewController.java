@@ -15,7 +15,12 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -321,16 +326,81 @@ public class TasksViewController {
     }
 
     public void handleDeleteTask(Task task) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Task");
-        alert.setHeaderText("Are you sure?");
-        alert.setContentText("Do you really want to delete '" + task.getTitle() + "'?");
+        // Create custom modern delete confirmation dialog
+        Stage dialogStage = new Stage();
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.setTitle("Delete Task");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        // Main container
+        VBox dialogRoot = new VBox(20);
+        dialogRoot.setStyle("-fx-background-color: transparent;");
+        dialogRoot.setPadding(new Insets(0));
+        dialogRoot.setAlignment(Pos.CENTER);
+
+        // Glass panel container
+        VBox glassPanel = new VBox(20);
+        glassPanel.getStyleClass().add("glass-panel");
+        glassPanel.setPadding(new Insets(30));
+        glassPanel.setAlignment(Pos.CENTER);
+        glassPanel.setMaxWidth(400);
+        glassPanel.setMaxHeight(Region.USE_PREF_SIZE);
+
+        // Icon (warning symbol)
+        Label iconLabel = new Label("⚠️");
+        iconLabel.setStyle("-fx-font-size: 48px; -fx-text-fill: #f38ba8;");
+
+        // Title
+        Label titleLabel = new Label("Delete Task");
+        titleLabel.getStyleClass().add("title-large");
+        titleLabel.setStyle(titleLabel.getStyle() + "-fx-text-fill: #f38ba8;");
+
+        // Message
+        Label messageLabel = new Label("Are you sure you want to delete\n\"" + task.getTitle() + "\"?");
+        messageLabel.getStyleClass().add("subtitle");
+        messageLabel.setTextAlignment(TextAlignment.CENTER);
+        messageLabel.setWrapText(true);
+
+        // Buttons container
+        HBox buttonBox = new HBox(15);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        // Cancel button
+        Button cancelBtn = new Button("Cancel");
+        cancelBtn.getStyleClass().add("btn-glass-primary");
+        cancelBtn.setOnAction(e -> dialogStage.close());
+
+        // Delete button
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.getStyleClass().add("btn-glass-secondary");
+        deleteBtn.setOnAction(e -> {
             CSVHelper.deleteTask(task.getId());
             refresh();
-        }
+            dialogStage.close();
+        });
+
+        buttonBox.getChildren().addAll(cancelBtn, deleteBtn);
+
+        // Add all elements to glass panel
+        glassPanel.getChildren().addAll(iconLabel, titleLabel, messageLabel, buttonBox);
+
+        // Add glass panel to root
+        dialogRoot.getChildren().add(glassPanel);
+
+        // Create scene
+        Scene scene = new Scene(dialogRoot);
+        scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
+
+        // Add fade in animation
+        dialogRoot.setOpacity(0);
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(300), dialogRoot);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.play();
+
+        dialogStage.setScene(scene);
+        dialogStage.showAndWait();
     }
 
     @FXML
