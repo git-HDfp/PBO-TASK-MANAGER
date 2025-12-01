@@ -38,19 +38,16 @@ public class RegisterController {
     public void initialize() {
         errorLabel.setVisible(false);
 
-        // Add enter key navigation
         usernameField.setOnAction(e -> emailField.requestFocus());
         emailField.setOnAction(e -> passwordField.requestFocus());
         passwordField.setOnAction(e -> confirmPasswordField.requestFocus());
         confirmPasswordField.setOnAction(e -> handleRegister());
 
-        // Clear error on input
         usernameField.textProperty().addListener((obs, old, newVal) -> clearError());
         emailField.textProperty().addListener((obs, old, newVal) -> clearError());
         passwordField.textProperty().addListener((obs, old, newVal) -> clearError());
         confirmPasswordField.textProperty().addListener((obs, old, newVal) -> clearError());
 
-        // Real-time validation feedback
         usernameField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused && !usernameField.getText().isEmpty()) {
                 validateUsername();
@@ -69,7 +66,6 @@ public class RegisterController {
             }
         });
 
-        // Real-time password matching validation
         passwordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
         confirmPasswordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
     }
@@ -81,13 +77,11 @@ public class RegisterController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // Validation - Empty fields
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             showError("Please fill in all fields");
             return;
         }
 
-        // Validation - Username length
         if (username.length() < 3) {
             showError("Username must be at least 3 characters long");
             usernameField.requestFocus();
@@ -100,14 +94,12 @@ public class RegisterController {
             return;
         }
 
-        // Validation - Username format (alphanumeric and underscore only)
         if (!username.matches("^[a-zA-Z0-9_]+$")) {
             showError("Username can only contain letters, numbers, and underscores");
             usernameField.requestFocus();
             return;
         }
 
-        // Validation - Email format
         if (!email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             showError("Please enter a valid email address");
             emailField.requestFocus();
@@ -120,7 +112,6 @@ public class RegisterController {
             return;
         }
 
-        // Validation - Password length
         if (password.length() < 6) {
             showError("Password must be at least 6 characters long");
             passwordField.requestFocus();
@@ -133,7 +124,6 @@ public class RegisterController {
             return;
         }
 
-        // Validation - Password match
         if (!password.equals(confirmPassword)) {
             showError("Passwords do not match");
             confirmPasswordField.clear();
@@ -141,11 +131,10 @@ public class RegisterController {
             return;
         }
 
-        // Disable button during processing
         registerButton.setDisable(true);
 
         try {
-            // Check if username already exists
+
             if (CSVHelper.userExists(username)) {
                 showError("Username already exists. Please choose another one.");
                 usernameField.requestFocus();
@@ -153,13 +142,10 @@ public class RegisterController {
                 return;
             }
 
-            // Create new user
             User newUser = new User(username, password, email);
 
-            // Save to CSV
             CSVHelper.saveUser(newUser);
 
-            // Show success message
             showSuccessAndRedirect(username);
 
         } catch (Exception e) {
@@ -224,18 +210,17 @@ public class RegisterController {
     }
 
     private void showSuccessAndRedirect(String username) {
-        // Create custom dialog stage
+
         Stage dialogStage = new Stage();
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.initStyle(StageStyle.TRANSPARENT);
         dialogStage.setResizable(false);
 
-        // Main container with glassmorphism effect
         VBox content = new VBox(20);
         content.setAlignment(Pos.CENTER);
         content.setPadding(new Insets(40));
         content.setPrefWidth(400);
-        // Modern dark theme with subtle gradient and glass effect
+
         content.setStyle(
                 "-fx-background-color: linear-gradient(to bottom right, #1e293b, #0f172a); " +
                         "-fx-background-radius: 24; " +
@@ -244,7 +229,6 @@ public class RegisterController {
                         "-fx-border-radius: 24; " +
                         "-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 30, 0, 0, 15);");
 
-        // Success Icon (Checkmark in a circle)
         Label checkIcon = new Label("✓");
         checkIcon.setStyle(
                 "-fx-font-size: 48px; " +
@@ -252,7 +236,6 @@ public class RegisterController {
                         "-fx-font-weight: bold; " +
                         "-fx-font-family: 'Segoe UI Emoji', 'Arial';");
 
-        // Circle container for the checkmark
         VBox iconContainer = new VBox(checkIcon);
         iconContainer.setAlignment(Pos.CENTER);
         iconContainer.setMaxSize(90, 90);
@@ -264,7 +247,6 @@ public class RegisterController {
                         "-fx-border-radius: 45; " +
                         "-fx-border-width: 1px;");
 
-        // Title
         Label titleLabel = new Label("Welcome Aboard!");
         titleLabel.setStyle(
                 "-fx-text-fill: white; " +
@@ -272,14 +254,12 @@ public class RegisterController {
                         "-fx-font-weight: bold; " +
                         "-fx-font-family: 'Segoe UI', 'Arial';");
 
-        // Subtitle
         Label subtitleLabel = new Label("Your account has been created successfully");
         subtitleLabel.setStyle(
                 "-fx-text-fill: #94a3b8; " + // Slate-400
                         "-fx-font-size: 14px; " +
                         "-fx-font-family: 'Segoe UI', 'Arial';");
 
-        // User Profile Card
         VBox userCard = new VBox(12);
         userCard.setAlignment(Pos.CENTER);
         userCard.setPadding(new Insets(20, 40, 20, 40));
@@ -289,7 +269,6 @@ public class RegisterController {
                         "-fx-border-color: rgba(255, 255, 255, 0.05); " +
                         "-fx-border-radius: 16;");
 
-        // Avatar placeholder (First letter of username)
         String initial = (username != null && !username.isEmpty()) ? username.substring(0, 1).toUpperCase() : "?";
         Label avatarLabel = new Label(initial);
         avatarLabel.setStyle(
@@ -315,7 +294,6 @@ public class RegisterController {
 
         userCard.getChildren().addAll(avatarCircle, userLabel);
 
-        // Loading/Redirect message
         Label loadingLabel = new Label("Redirecting to login...");
         loadingLabel.setStyle(
                 "-fx-text-fill: #64748b; " + // Slate-500
@@ -324,13 +302,10 @@ public class RegisterController {
 
         content.getChildren().addAll(iconContainer, titleLabel, subtitleLabel, userCard, loadingLabel);
 
-        // Scene setup
         Scene scene = new Scene(content);
         scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
         dialogStage.setScene(scene);
 
-        // Animations
-        // 1. Pop in effect for the whole card
         ScaleTransition scaleIn = new ScaleTransition(Duration.millis(300), content);
         scaleIn.setFromX(0.9);
         scaleIn.setFromY(0.9);
@@ -341,7 +316,6 @@ public class RegisterController {
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
 
-        // 2. Icon bounce
         ScaleTransition iconBounce = new ScaleTransition(Duration.millis(600), iconContainer);
         iconBounce.setFromX(0.0);
         iconBounce.setFromY(0.0);
@@ -349,12 +323,10 @@ public class RegisterController {
         iconBounce.setToY(1.0);
         iconBounce.setDelay(Duration.millis(100));
 
-        // Play animations
         scaleIn.play();
         fadeIn.play();
         iconBounce.play();
 
-        // Auto-close logic
         final int[] countdown = { 3 };
         loadingLabel.setText("Redirecting to login in " + countdown[0] + "s...");
 
@@ -378,7 +350,6 @@ public class RegisterController {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
 
-        // Auto-hide error after 5 seconds
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished(e -> errorLabel.setVisible(false));
         pause.play();
@@ -387,7 +358,7 @@ public class RegisterController {
     private void showPersistentError(String message) {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
-        // No auto-hide for persistent errors
+
     }
 
     private void clearError() {

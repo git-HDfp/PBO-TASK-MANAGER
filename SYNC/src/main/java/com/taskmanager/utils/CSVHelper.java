@@ -13,7 +13,6 @@ public class CSVHelper {
     private static final String USERS_FILE = DATA_DIR + "/users.csv";
     private static final String TASKS_FILE = DATA_DIR + "/tasks.csv";
 
-    // Inisialisasi file dan folder jika belum ada
     public static void initializeFiles() {
         try {
             Files.createDirectories(Paths.get(DATA_DIR));
@@ -30,8 +29,6 @@ public class CSVHelper {
             file.createNewFile();
         }
     }
-
-    // ==================== USER OPERATIONS ====================
 
     public static void saveUser(User user) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(USERS_FILE, true))) {
@@ -61,12 +58,6 @@ public class CSVHelper {
         return getUserByUsername(username) != null;
     }
 
-    /**
-     * Update existing user in CSV file
-     * 
-     * @param updatedUser User object with updated information
-     * @return true if update was successful, false otherwise
-     */
     public static boolean updateUser(User updatedUser) {
         List<String> lines = new ArrayList<>();
         boolean found = false;
@@ -76,7 +67,7 @@ public class CSVHelper {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",", -1);
                 if (parts.length >= 4 && parts[0].equals(updatedUser.getUsername())) {
-                    // Replace with updated user
+
                     lines.add(updatedUser.toCSV());
                     found = true;
                 } else {
@@ -95,8 +86,6 @@ public class CSVHelper {
         return false;
     }
 
-    // ==================== TASK OPERATIONS ====================
-
     public static void saveTask(Task task) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(TASKS_FILE, true))) {
             bw.write(task.toCSV());
@@ -111,14 +100,12 @@ public class CSVHelper {
         try (BufferedReader br = new BufferedReader(new FileReader(TASKS_FILE))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // Skip empty lines
+
                 if (line.trim().isEmpty())
                     continue;
 
                 String[] parts = parseCSVLine(line);
 
-                // Cek format csv:
-                // id,title,description,category,priority,status,progress,created_by,created_at,deadline
                 if (parts.length >= 10 && parts[7].equals(username)) {
                     Task task = new Task(
                             parts[0],
@@ -150,7 +137,7 @@ public class CSVHelper {
             while ((line = br.readLine()) != null) {
                 String[] parts = parseCSVLine(line);
                 if (parts.length > 0 && parts[0].equals(updatedTask.getId())) {
-                    // Replace with updated task
+
                     lines.add(updatedTask.toCSV());
                     found = true;
                 } else {
@@ -184,9 +171,6 @@ public class CSVHelper {
         writeLinesToFile(TASKS_FILE, lines);
     }
 
-    /**
-     * Update subject di semua tasks yang menggunakan subject lama
-     */
     public static void updateTasksSubject(String oldSubject, String newSubject) {
         List<String> lines = new ArrayList<>();
 
@@ -194,11 +178,11 @@ public class CSVHelper {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = parseCSVLine(line);
-                // parts[3] adalah subject/category
+
                 if (parts.length >= 10 && parts[3].equals(oldSubject)) {
-                    // Update subject
+
                     parts[3] = newSubject;
-                    // Reconstruct line
+
                     lines.add(String.join(",", parts));
                 } else {
                     lines.add(line);
@@ -211,11 +195,8 @@ public class CSVHelper {
         writeLinesToFile(TASKS_FILE, lines);
     }
 
-    // Helper sederhana untuk menangani koma dalam CSV jika diperlukan (implementasi
-    // basic)
     private static String[] parseCSVLine(String line) {
-        // Dalam implementasi nyata yang kompleks, gunakan library CSV seperti OpenCSV
-        // Di sini kita asumsi delimiter koma sederhana sesuai format Task.java
+
         return line.split(",", -1);
     }
 

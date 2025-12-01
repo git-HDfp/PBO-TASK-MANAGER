@@ -15,10 +15,9 @@ public class Task {
     private int progress;
     private String createdBy;
     private String createdAt;
-    // Field Baru
+
     private String deadline;
 
-    // Constructor untuk Task Baru
     public Task(String title, String description, String category, String priority, String createdBy, String deadline) {
         this.id = UUID.randomUUID().toString().substring(0, 8);
         this.title = title;
@@ -32,7 +31,6 @@ public class Task {
         this.deadline = deadline; // Simpan deadline
     }
 
-    // Constructor untuk Load dari CSV
     public Task(String id, String title, String description, String category, String priority,
             String status, int progress, String createdBy, String createdAt, String deadline) {
         this.id = id;
@@ -48,13 +46,12 @@ public class Task {
     }
 
     public String toCSV() {
-        // Escape newlines in description to prevent CSV breakage
+
         String safeDescription = description != null ? description.replace("\n", "\\n") : "";
         return id + "," + title + "," + safeDescription + "," + category + "," + priority + "," +
                 status + "," + progress + "," + createdBy + "," + createdAt + "," + (deadline != null ? deadline : "");
     }
 
-    // --- LOGIKA HITUNG MUNDUR ---
     public String getTimeRemaining() {
         if (deadline == null || deadline.isEmpty())
             return "No Deadline";
@@ -79,7 +76,6 @@ public class Task {
         }
     }
 
-    // Getters & Setters
     public String getId() {
         return id;
     }

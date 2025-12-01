@@ -21,7 +21,7 @@ public class CustomAlertDialog {
     private boolean result = false;
 
     public CustomAlertDialog() {
-        // Constructor
+
     }
 
     public boolean show(AlertType type, String title, String message) {
@@ -34,13 +34,11 @@ public class CustomAlertDialog {
         dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.setResizable(false);
 
-        // Main container
         VBox container = new VBox(20);
         container.setPadding(new Insets(30));
         container.setAlignment(Pos.CENTER);
         container.getStyleClass().add("custom-alert-container");
 
-        // Icon and title
         HBox headerBox = new HBox(15);
         headerBox.setAlignment(Pos.CENTER_LEFT);
 
@@ -52,13 +50,11 @@ public class CustomAlertDialog {
 
         headerBox.getChildren().addAll(iconLabel, titleLabel);
 
-        // Message
         Label messageLabel = new Label(message);
         messageLabel.getStyleClass().add("alert-message");
         messageLabel.setWrapText(true);
         messageLabel.setMaxWidth(300);
 
-        // Buttons
         HBox buttonBox = new HBox(15);
         buttonBox.setAlignment(Pos.CENTER);
 
@@ -85,7 +81,6 @@ public class CustomAlertDialog {
             buttonBox.getChildren().add(okButton);
         }
 
-        // Set icon based on type
         switch (type) {
             case SUCCESS:
                 iconLabel.setText("✅");
@@ -111,7 +106,6 @@ public class CustomAlertDialog {
         scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
         dialogStage.setScene(scene);
 
-        // Make it draggable
         makeDraggable(container);
 
         dialogStage.showAndWait();
@@ -134,7 +128,6 @@ public class CustomAlertDialog {
         });
     }
 
-    // Static methods for easy use
     public static void showSuccess(String title, String message) {
         new CustomAlertDialog().show(AlertType.SUCCESS, title, message);
     }
@@ -155,3 +148,4 @@ public class CustomAlertDialog {
         return new CustomAlertDialog().show(AlertType.CONFIRMATION, title, message, confirmText);
     }
 }
+

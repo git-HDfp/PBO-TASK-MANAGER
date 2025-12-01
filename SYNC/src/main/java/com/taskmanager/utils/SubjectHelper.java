@@ -6,7 +6,6 @@ import java.util.*;
 public class SubjectHelper {
     private static final String SUBJECTS_FILE = "SYNC/data/subjects.txt";
 
-    // Subject default (mata kuliah)
     private static final List<String> DEFAULT_SUBJECTS = Arrays.asList(
             "Basis Data",
             "Desain Analisis dan Algoritma",
@@ -16,9 +15,6 @@ public class SubjectHelper {
             "Matematika Diskrit",
             "Sistem Operasi");
 
-    /**
-     * Inisialisasi file subjects jika belum ada
-     */
     public static void initializeSubjects() {
         File file = new File(SUBJECTS_FILE);
         if (!file.exists()) {
@@ -31,9 +27,6 @@ public class SubjectHelper {
         }
     }
 
-    /**
-     * Mendapatkan semua subjects
-     */
     public static List<String> getAllSubjects() {
         initializeSubjects();
         List<String> subjects = new ArrayList<>();
@@ -54,7 +47,6 @@ public class SubjectHelper {
             e.printStackTrace();
         }
 
-        // Jika kosong, return default
         if (subjects.isEmpty()) {
             subjects.addAll(DEFAULT_SUBJECTS);
         }
@@ -62,9 +54,6 @@ public class SubjectHelper {
         return subjects;
     }
 
-    /**
-     * Menambah subject baru
-     */
     public static boolean addSubject(String subject) {
         if (subject == null || subject.trim().isEmpty()) {
             return false;
@@ -72,7 +61,6 @@ public class SubjectHelper {
 
         List<String> subjects = getAllSubjects();
 
-        // Check if already exists
         if (subjects.contains(subject.trim())) {
             return false;
         }
@@ -82,9 +70,6 @@ public class SubjectHelper {
         return true;
     }
 
-    /**
-     * Menghapus subject
-     */
     public static boolean deleteSubject(String subject) {
         List<String> subjects = getAllSubjects();
         boolean removed = subjects.remove(subject);
@@ -96,9 +81,6 @@ public class SubjectHelper {
         return removed;
     }
 
-    /**
-     * Mengupdate/mengedit subject
-     */
     public static boolean updateSubject(String oldSubject, String newSubject) {
         if (newSubject == null || newSubject.trim().isEmpty()) {
             return false;
@@ -111,7 +93,6 @@ public class SubjectHelper {
             subjects.set(index, newSubject.trim());
             saveSubjects(subjects);
 
-            // Update all tasks yang menggunakan subject lama
             CSVHelper.updateTasksSubject(oldSubject, newSubject.trim());
             return true;
         }
@@ -119,9 +100,6 @@ public class SubjectHelper {
         return false;
     }
 
-    /**
-     * Menyimpan subjects ke file
-     */
     private static void saveSubjects(List<String> subjects) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(SUBJECTS_FILE));
@@ -135,3 +113,4 @@ public class SubjectHelper {
         }
     }
 }
+

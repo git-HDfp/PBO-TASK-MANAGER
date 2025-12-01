@@ -29,11 +29,9 @@ public class LoginController {
     public void initialize() {
         errorLabel.setVisible(false);
 
-        // Add enter key support
         usernameField.setOnAction(e -> passwordField.requestFocus());
         passwordField.setOnAction(e -> handleLogin());
 
-        // Clear error on input
         usernameField.textProperty().addListener((obs, old, newVal) -> {
             if (errorLabel.isVisible()) {
                 errorLabel.setVisible(false);
@@ -52,7 +50,6 @@ public class LoginController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
-        // Validation
         if (username.isEmpty() || password.isEmpty()) {
             showError("Please fill in all fields");
             return;
@@ -63,11 +60,10 @@ public class LoginController {
             return;
         }
 
-        // Disable button during processing
         loginButton.setDisable(true);
 
         try {
-            // Get user from CSV
+
             User user = CSVHelper.getUserByUsername(username);
 
             if (user == null) {
@@ -76,16 +72,14 @@ public class LoginController {
                 return;
             }
 
-            // Verify password
             if (!user.verifyPassword(password)) {
                 showError("Incorrect password. Please try again.");
-                // passwordField.clear(); // Removed to prevent hiding error message immediately
+
                 passwordField.requestFocus();
                 loginButton.setDisable(false);
                 return;
             }
 
-            // Login successful
             currentUsername = username;
             openDashboard();
 
@@ -139,7 +133,6 @@ public class LoginController {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
 
-        // Auto-hide error after 5 seconds
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished(e -> errorLabel.setVisible(false));
         pause.play();

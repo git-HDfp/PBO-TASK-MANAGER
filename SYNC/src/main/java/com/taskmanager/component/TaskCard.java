@@ -31,7 +31,6 @@ public class TaskCard extends VBox {
         this.getStyleClass().add("task-card");
         this.setPrefWidth(250); // Ukuran kartu
 
-        // 1. Header: Title & Priority
         HBox header = new HBox(10);
         Label titleLabel = new Label(task.getTitle());
         titleLabel.getStyleClass().add("task-title");
@@ -40,13 +39,11 @@ public class TaskCard extends VBox {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // Ensure priority class matches CSS (e.g., priority-HIGH)
         Label priorityLabel = new Label(task.getPriority().toUpperCase());
         priorityLabel.getStyleClass().addAll("priority-badge", "priority-" + task.getPriority().toUpperCase());
 
         header.getChildren().addAll(titleLabel, spacer, priorityLabel);
 
-        // 2. Description (Short)
         String descText = task.getDescription();
         if (descText.length() > 50)
             descText = descText.substring(0, 50) + "...";
@@ -54,14 +51,12 @@ public class TaskCard extends VBox {
         descLabel.getStyleClass().add("subtitle");
         descLabel.setWrapText(true);
 
-        // 3. Deadline
         Label deadlineLabel = new Label("🕒 " + task.getTimeRemaining());
         deadlineLabel.getStyleClass().add("deadline-badge");
         if (task.getTimeRemaining().contains("OVERDUE")) {
             deadlineLabel.getStyleClass().add("deadline-warning");
         }
 
-        // 4. Action Buttons (Edit & Delete)
         HBox actions = new HBox(8);
         Button editBtn = new Button("Edit");
         editBtn.getStyleClass().add("btn-icon");
@@ -76,11 +71,9 @@ public class TaskCard extends VBox {
 
         actions.getChildren().addAll(deadlineLabel, actionSpacer, editBtn, deleteBtn);
 
-        // 5. Progress
         ProgressBar progressBar = new ProgressBar(task.getProgress() / 100.0);
         progressBar.setMaxWidth(Double.MAX_VALUE);
 
-        // Dynamic Neon Progress Color based on Priority
         String progressColor = switch (task.getPriority().toUpperCase()) {
             case "HIGH" -> "#f38ba8"; // Neon Pink
             case "MEDIUM" -> "#cba6f7"; // Neon Purple
@@ -91,13 +84,11 @@ public class TaskCard extends VBox {
         this.getChildren().addAll(header, descLabel, progressBar, actions);
     }
 
-    // --- LOGIKA DRAG SOURCE ---
     private void setupDragEvents() {
         this.setOnDragDetected(event -> {
-            // Mulai Drag
+
             Dragboard db = this.startDragAndDrop(TransferMode.MOVE);
 
-            // Simpan ID Task ke clipboard agar Column tau task mana yg dipindah
             ClipboardContent content = new ClipboardContent();
             content.putString(task.getId());
             db.setContent(content);

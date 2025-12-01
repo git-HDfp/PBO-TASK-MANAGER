@@ -156,13 +156,11 @@ public class DashboardController {
                 try {
                     LocalDateTime deadline = LocalDateTime.parse(task.getDeadline());
 
-                    // Include if overdue OR due within next 24 hours
-                    // Simply: if deadline is before (now + 24 hours)
                     if (deadline.isBefore(now.plusHours(24))) {
                         urgent.add(task);
                     }
                 } catch (Exception e) {
-                    // Skip invalid deadline
+
                 }
             }
         }
@@ -174,12 +172,11 @@ public class DashboardController {
         List<Task> urgentTasks = getUrgentTasks();
 
         if (urgentTasks.isEmpty()) {
-            // Show cool notification message instead of popup
+
             notificationMessage
                     .setText("🎉 You're all caught up! No urgent tasks to worry about.");
             notificationMessage.setVisible(true);
 
-            // Auto-hide after 5 seconds
             FadeTransition fadeOut = new FadeTransition(Duration.seconds(5), notificationMessage);
             fadeOut.setFromValue(1);
             fadeOut.setToValue(0);
@@ -225,7 +222,6 @@ public class DashboardController {
                     taskInfo.getChildren().add(taskSubject);
                 }
 
-                // Deadline section dengan overdue check
                 VBox deadlineBox = new VBox(3);
                 deadlineBox.setAlignment(Pos.CENTER_RIGHT);
 
@@ -240,7 +236,7 @@ public class DashboardController {
                         boolean isOverdue = now.isAfter(deadline);
 
                         if (isOverdue) {
-                            // Merah untuk overdue
+
                             deadlineLabel
                                     .setStyle("-fx-font-size: 13px; -fx-text-fill: #e74c3c; -fx-font-weight: bold;");
 
@@ -250,7 +246,7 @@ public class DashboardController {
 
                             deadlineBox.getChildren().addAll(deadlineLabel, overdueLabel);
                         } else {
-                            // Hijau untuk upcoming
+
                             deadlineLabel
                                     .setStyle("-fx-font-size: 13px; -fx-text-fill: #2ecc71; -fx-font-weight: bold;");
                             deadlineBox.getChildren().add(deadlineLabel);
@@ -272,7 +268,6 @@ public class DashboardController {
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-            // Apply style class for modern scrollbar
             scrollPane.getStyleClass().add("urgent-scroll");
 
             container.getChildren().add(scrollPane);

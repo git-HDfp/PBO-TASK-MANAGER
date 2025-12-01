@@ -29,20 +29,11 @@ import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.effect.DropShadow;
 
-/**
- * Profile Controller
- * Handles user profile management including:
- * - Viewing profile information
- * - Editing email
- * - Changing password
- * - Viewing user statistics
- */
 public class ProfileController {
 
     @FXML
     private BorderPane rootPane;
 
-    // Sidebar elements
     @FXML
     private VBox sidebar;
     @FXML
@@ -83,7 +74,6 @@ public class ProfileController {
     @FXML
     private Label successLabel;
 
-    // Password change fields
     @FXML
     private PasswordField currentPasswordField;
     @FXML
@@ -97,7 +87,6 @@ public class ProfileController {
     @FXML
     private Label passwordSuccessLabel;
 
-    // Statistics
     @FXML
     private Label totalTasksLabel;
     @FXML
@@ -109,23 +98,20 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-        // Smooth fade in animation
+
         rootPane.setOpacity(0);
         FadeTransition fadeIn = new FadeTransition(Duration.millis(500), rootPane);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.play();
 
-        // Load user data
         loadUserData();
         loadUserStatistics();
 
-        // Initialize sidebar state
         if (sidebar != null) {
             sidebar.setPrefWidth(SIDEBAR_EXPANDED_WIDTH);
         }
 
-        // Add input listeners to hide error/success messages
         emailField.textProperty().addListener((obs, old, newVal) -> {
             emailStatusLabel.setVisible(false);
             successLabel.setVisible(false);
@@ -133,10 +119,9 @@ public class ProfileController {
 
         currentPasswordField.textProperty().addListener((obs, old, newVal) -> {
             passwordErrorLabel.setVisible(false);
-            // Don't hide success message while typing
+
         });
 
-        // Real-time current password validation
         currentPasswordField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused && !currentPasswordField.getText().isEmpty()) {
                 validateCurrentPassword();
@@ -145,15 +130,14 @@ public class ProfileController {
 
         newPasswordField.textProperty().addListener((obs, old, newVal) -> {
             passwordErrorLabel.setVisible(false);
-            // Don't hide success message while typing
+
         });
 
         confirmPasswordField.textProperty().addListener((obs, old, newVal) -> {
             passwordErrorLabel.setVisible(false);
-            // Don't hide success message while typing
+
         });
 
-        // Real-time password matching validation
         newPasswordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
         confirmPasswordField.textProperty().addListener((obs, old, newVal) -> validatePasswords());
     }
@@ -191,9 +175,6 @@ public class ProfileController {
             btnLogout.setContentDisplay(cd);
     }
 
-    /**
-     * Load current user data and display in profile
-     */
     private void loadUserData() {
         String username = LoginController.currentUsername;
         if (username == null) {
@@ -207,12 +188,10 @@ public class ProfileController {
             return;
         }
 
-        // Set user information
         welcomeLabel.setText("Hi, " + username);
         usernameLabel.setText(username);
         emailField.setText(currentUser.getEmail());
 
-        // Format and display creation date
         try {
             LocalDateTime dateTime = LocalDateTime.parse(currentUser.getCreatedAt(),
                     DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -223,9 +202,6 @@ public class ProfileController {
         }
     }
 
-    /**
-     * Load user statistics from tasks
-     */
     private void loadUserStatistics() {
         List<Task> tasks = CSVHelper.getTasksByUsername(LoginController.currentUsername);
 
@@ -247,14 +223,10 @@ public class ProfileController {
         inProgressTasksLabel.setText(String.valueOf(inProgress));
     }
 
-    /**
-     * Handle save profile (email update)
-     */
     @FXML
     private void handleSaveProfile() {
         String newEmail = emailField.getText().trim();
 
-        // Validation
         if (newEmail.isEmpty()) {
             showError("Email cannot be empty", emailStatusLabel);
             return;
@@ -265,10 +237,8 @@ public class ProfileController {
             return;
         }
 
-        // Update user email
         currentUser.setEmail(newEmail);
 
-        // Save to CSV
         if (CSVHelper.updateUser(currentUser)) {
             showSuccess("Profile updated successfully!", successLabel);
             saveButton.setDisable(false);
@@ -277,22 +247,17 @@ public class ProfileController {
         }
     }
 
-    /**
-     * Handle password change
-     */
     @FXML
     private void handleChangePassword() {
         String currentPassword = currentPasswordField.getText();
         String newPassword = newPasswordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // Validation
         if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
             showError("All password fields are required", passwordErrorLabel);
             return;
         }
 
-        // Verify current password
         if (!currentUser.verifyPassword(currentPassword)) {
             showError("Current password is incorrect", passwordErrorLabel);
             currentPasswordField.clear();
@@ -300,13 +265,11 @@ public class ProfileController {
             return;
         }
 
-        // Validate new password
         if (newPassword.length() < 6) {
             showError("New password must be at least 6 characters", passwordErrorLabel);
             return;
         }
 
-        // Check if passwords match
         if (!newPassword.equals(confirmPassword)) {
             showError("New passwords do not match", passwordErrorLabel);
             confirmPasswordField.clear();
@@ -314,23 +277,18 @@ public class ProfileController {
             return;
         }
 
-        // Don't allow same password
         if (currentUser.verifyPassword(newPassword)) {
             showError("New password must be different from current password", passwordErrorLabel);
             return;
         }
 
-        // Update password
         currentUser.setPasswordHash(User.hashPassword(newPassword));
 
-        // Save to CSV
         if (CSVHelper.updateUser(currentUser)) {
-            // Show success popup notification
-            // Show success popup notification
+
             showModernSuccessDialog("Password Changed",
                     "Your password has been successfully updated! Keep it safe. 🔒");
 
-            // Clear password fields immediately
             currentPasswordField.clear();
             newPasswordField.clear();
             confirmPasswordField.clear();
@@ -339,34 +297,22 @@ public class ProfileController {
         }
     }
 
-    /**
-     * Navigate to Dashboard
-     */
     @FXML
     private void handleGoToDashboard() {
         animateAndChangeScene("/view/Dashboard.fxml");
     }
 
-    /**
-     * Navigate to Tasks View
-     */
     @FXML
     private void handleGoToTasks() {
         animateAndChangeScene("/view/TasksView.fxml");
     }
 
-    /**
-     * Handle logout
-     */
     @FXML
     private void handleLogout() {
         LoginController.currentUsername = null;
         animateAndChangeScene("/view/Login.fxml");
     }
 
-    /**
-     * Animate and change scene
-     */
     private void animateAndChangeScene(String fxmlPath) {
         FadeTransition fadeOut = new FadeTransition(Duration.millis(250), rootPane);
         fadeOut.setFromValue(1);
@@ -389,35 +335,24 @@ public class ProfileController {
         fadeOut.play();
     }
 
-    /**
-     * Show error message
-     */
     private void showError(String message, Label errorLabel) {
         errorLabel.setText("❌ " + message);
         errorLabel.setVisible(true);
 
-        // Auto-hide after 5 seconds
         PauseTransition pause = new PauseTransition(Duration.seconds(5));
         pause.setOnFinished(e -> errorLabel.setVisible(false));
         pause.play();
     }
 
-    /**
-     * Show success message
-     */
     private void showSuccess(String message, Label successLabel) {
         successLabel.setText("✅ " + message);
         successLabel.setVisible(true);
 
-        // Auto-hide after 3 seconds
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(e -> successLabel.setVisible(false));
         pause.play();
     }
 
-    /**
-     * Validate current password in real-time
-     */
     private void validateCurrentPassword() {
         String currentPassword = currentPasswordField.getText();
         if (!currentPassword.isEmpty() && !currentUser.verifyPassword(currentPassword)) {
@@ -428,9 +363,6 @@ public class ProfileController {
         }
     }
 
-    /**
-     * Validate password matching in real-time
-     */
     private void validatePasswords() {
         String newPassword = newPasswordField.getText();
         String confirmPassword = confirmPasswordField.getText();
@@ -443,35 +375,23 @@ public class ProfileController {
         }
     }
 
-    /**
-     * Show persistent error message (no auto-hide)
-     */
     private void showPersistentError(String message, Label errorLabel) {
         errorLabel.setText("❌ " + message);
         errorLabel.setVisible(true);
-        // No auto-hide for persistent errors
+
     }
 
-    /**
-     * Clear error message
-     */
     private void clearError(Label errorLabel) {
         if (errorLabel.isVisible()) {
             errorLabel.setVisible(false);
         }
     }
 
-    /**
-     * Validate email format
-     */
     private boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
     }
 
-    /**
-     * Show modern success dialog
-     */
     private void showModernSuccessDialog(String title, String message) {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -482,32 +402,26 @@ public class ProfileController {
         root.setStyle(
                 "-fx-background-color: #1a1a2e; -fx-background-radius: 20; -fx-border-color: #2ecc71; -fx-border-width: 2; -fx-border-radius: 20; -fx-padding: 30;");
 
-        // Add drop shadow for depth
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.rgb(0, 0, 0, 0.5));
         shadow.setRadius(20);
         root.setEffect(shadow);
 
-        // Icon
         Label iconLabel = new Label("✨");
         iconLabel.setStyle("-fx-font-size: 48px; -fx-text-fill: white;");
 
-        // Title
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
 
-        // Message
         Label messageLabel = new Label(message);
         messageLabel.setStyle(
                 "-fx-font-size: 14px; -fx-text-fill: #a0a0a0; -fx-wrap-text: true; -fx-text-alignment: center;");
 
-        // Button
         Button closeBtn = new Button("Awesome!");
         closeBtn.setStyle(
                 "-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 30; -fx-background-radius: 30; -fx-cursor: hand;");
         closeBtn.setOnAction(e -> dialog.close());
 
-        // Hover effect for button
         closeBtn.setOnMouseEntered(e -> closeBtn.setStyle(
                 "-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 30; -fx-background-radius: 30; -fx-cursor: hand;"));
         closeBtn.setOnMouseExited(e -> closeBtn.setStyle(
@@ -519,9 +433,9 @@ public class ProfileController {
         scene.setFill(Color.TRANSPARENT);
         dialog.setScene(scene);
 
-        // Center on screen
         dialog.centerOnScreen();
 
         dialog.showAndWait();
     }
 }
+

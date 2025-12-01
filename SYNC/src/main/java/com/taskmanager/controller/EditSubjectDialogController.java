@@ -20,10 +20,8 @@ public class EditSubjectDialogController {
     public void setSubjectName(String subjectName) {
         this.subjectNameField.setText(subjectName);
 
-        // Select all text for easy editing
         this.subjectNameField.selectAll();
 
-        // Request focus on the text field
         this.subjectNameField.requestFocus();
     }
 
@@ -32,7 +30,7 @@ public class EditSubjectDialogController {
         String trimmedName = subjectNameField.getText().trim();
 
         if (trimmedName.isEmpty()) {
-            // Add visual feedback for empty input
+
             subjectNameField.getStyleClass().add("error-input");
             return;
         }
@@ -61,3 +59,4 @@ public class EditSubjectDialogController {
         return newSubjectName;
     }
 }
+

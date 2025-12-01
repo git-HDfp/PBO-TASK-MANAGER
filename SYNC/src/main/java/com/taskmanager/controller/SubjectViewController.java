@@ -34,7 +34,6 @@ public class SubjectViewController {
     public void initialize() {
         loadSubjects();
 
-        // Add listener to selection to enable/disable buttons
         subjectListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             boolean hasSelection = newVal != null;
             btnEdit.setDisable(!hasSelection);
@@ -80,21 +79,18 @@ public class SubjectViewController {
         }
 
         try {
-            // Load the custom dialog
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditSubjectDialog.fxml"));
             Parent root = loader.load();
 
-            // Get the controller and set the subject name
             EditSubjectDialogController dialogController = loader.getController();
             dialogController.setSubjectName(selectedSubject);
 
-            // Create and configure the stage
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Subject");
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(btnEdit.getScene().getWindow());
 
-            // Create scene with the loaded FXML
             Scene scene = new Scene(root);
             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
             scene.getStylesheets().add(getClass().getResource("/view/style.css").toExternalForm());
@@ -102,10 +98,8 @@ public class SubjectViewController {
             dialogStage.setScene(scene);
             dialogStage.initStyle(StageStyle.TRANSPARENT);
 
-            // Show and wait for the dialog to close
             dialogStage.showAndWait();
 
-            // Process the result
             if (dialogController.isSaved()) {
                 String newName = dialogController.getNewSubjectName();
 
@@ -161,3 +155,4 @@ public class SubjectViewController {
         }
     }
 }
+

@@ -21,7 +21,6 @@ public class TaskEditorController {
     @FXML
     private ComboBox<String> statusComboBox;
 
-    // Field untuk Deadline
     @FXML
     private DatePicker deadlinePicker;
     @FXML
@@ -53,7 +52,7 @@ public class TaskEditorController {
 
     @FXML
     public void initialize() {
-        // Load subjects dari SubjectHelper
+
         subjectComboBox.getItems().setAll(SubjectHelper.getAllSubjects());
         if (!subjectComboBox.getItems().isEmpty()) {
             subjectComboBox.setValue(subjectComboBox.getItems().get(0));
@@ -62,11 +61,9 @@ public class TaskEditorController {
         priorityComboBox.getItems().addAll("High", "Medium", "Low");
         priorityComboBox.setValue("Medium");
 
-        // HANYA 3 STATUS: draft, in_progress, done
         statusComboBox.getItems().addAll("draft", "in_progress", "done");
         statusComboBox.setValue("draft");
 
-        // Progress slider listener untuk update label dan otomatis ubah status
         progressSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             int progress = newVal.intValue();
             progressLabel.setText(progress + "%");
@@ -74,15 +71,9 @@ public class TaskEditorController {
         });
     }
 
-    /**
-     * Metode untuk otomatis mengubah status berdasarkan progress
-     * - 0%: otomatis ke draft (bahkan kalau sebelumnya in_progress)
-     * - 1-99%: otomatis ke in_progress
-     * - 100%: otomatis ke done
-     */
     private void updateStatusBasedOnProgress(int progress) {
         if (progress == 0) {
-            // FIX: Langsung set ke draft, bahkan kalau sebelumnya in_progress
+
             statusComboBox.setValue("draft");
         } else if (progress > 0 && progress < 100) {
             statusComboBox.setValue("in_progress");
@@ -105,7 +96,6 @@ public class TaskEditorController {
         statusComboBox.setValue(task.getStatus());
         progressSlider.setValue(task.getProgress());
 
-        // Set Deadline di UI jika ada
         if (task.getDeadline() != null && !task.getDeadline().isEmpty()) {
             try {
                 String[] parts = task.getDeadline().split("T");
@@ -124,7 +114,6 @@ public class TaskEditorController {
         if (title == null || title.trim().isEmpty())
             return;
 
-        // Ambil Deadline dari Input
         String deadlineString = "";
         if (deadlinePicker.getValue() != null) {
             String date = deadlinePicker.getValue().format(DateTimeFormatter.ISO_LOCAL_DATE);
