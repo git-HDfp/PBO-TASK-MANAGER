@@ -21,8 +21,13 @@ import javafx.util.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
+import javafx.scene.Scene;
+import javafx.geometry.Pos;
+import javafx.scene.paint.Color;
+import javafx.scene.effect.DropShadow;
 
 /**
  * Profile Controller
@@ -321,11 +326,9 @@ public class ProfileController {
         // Save to CSV
         if (CSVHelper.updateUser(currentUser)) {
             // Show success popup notification
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Password Changed");
-            alert.setHeaderText("Success!");
-            alert.setContentText("Your password has been changed successfully.");
-            alert.showAndWait();
+            // Show success popup notification
+            showModernSuccessDialog("Password Changed",
+                    "Your password has been successfully updated! Keep it safe. 🔒");
 
             // Clear password fields immediately
             currentPasswordField.clear();
@@ -464,5 +467,61 @@ public class ProfileController {
     private boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
+    }
+
+    /**
+     * Show modern success dialog
+     */
+    private void showModernSuccessDialog(String title, String message) {
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        VBox root = new VBox(20);
+        root.setAlignment(Pos.CENTER);
+        root.setStyle(
+                "-fx-background-color: #1a1a2e; -fx-background-radius: 20; -fx-border-color: #2ecc71; -fx-border-width: 2; -fx-border-radius: 20; -fx-padding: 30;");
+
+        // Add drop shadow for depth
+        DropShadow shadow = new DropShadow();
+        shadow.setColor(Color.rgb(0, 0, 0, 0.5));
+        shadow.setRadius(20);
+        root.setEffect(shadow);
+
+        // Icon
+        Label iconLabel = new Label("✨");
+        iconLabel.setStyle("-fx-font-size: 48px; -fx-text-fill: white;");
+
+        // Title
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;");
+
+        // Message
+        Label messageLabel = new Label(message);
+        messageLabel.setStyle(
+                "-fx-font-size: 14px; -fx-text-fill: #a0a0a0; -fx-wrap-text: true; -fx-text-alignment: center;");
+
+        // Button
+        Button closeBtn = new Button("Awesome!");
+        closeBtn.setStyle(
+                "-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 30; -fx-background-radius: 30; -fx-cursor: hand;");
+        closeBtn.setOnAction(e -> dialog.close());
+
+        // Hover effect for button
+        closeBtn.setOnMouseEntered(e -> closeBtn.setStyle(
+                "-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 30; -fx-background-radius: 30; -fx-cursor: hand;"));
+        closeBtn.setOnMouseExited(e -> closeBtn.setStyle(
+                "-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 30; -fx-background-radius: 30; -fx-cursor: hand;"));
+
+        root.getChildren().addAll(iconLabel, titleLabel, messageLabel, closeBtn);
+
+        Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+        dialog.setScene(scene);
+
+        // Center on screen
+        dialog.centerOnScreen();
+
+        dialog.showAndWait();
     }
 }

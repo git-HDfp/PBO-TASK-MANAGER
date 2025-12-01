@@ -7,3 +7,4 @@ Matematika Diskrit
 Sistem Operasi
 Konsep Pemrograman
 Sistem Digital
+Struktur Data dan Algoritma
